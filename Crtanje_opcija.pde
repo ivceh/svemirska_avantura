@@ -3,7 +3,7 @@ void crtajOpcije()
   background(0);
   textSize(width/40);
   fill(50,124,0);
-  text("Neke opcije, ispod gumb za povratak.",width/3,height/3);
+  text("Neke opcije, ispod gumb za povratak.",width/2,height/3);
   
   rectMode(CENTER);
   fill(200,0,100);
