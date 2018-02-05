@@ -40,33 +40,6 @@ void draw()
     if(stanjeIzbornika == 0)
     {
       crtajIzbornik();
-      if(mousePressed)
-      {
-        
-        //je li kliknut gumb za start
-         if(pow(mouseX-0.2*width,2)+pow(mouseY-0.45*height,2)<pow(0.075*width,2)) //0.075=0.15/2
-         {
-           stanjeIzbornika = 1;
-         }
-         
-         //je li kliknut gumb za info
-         if(pow(mouseX-0.6*width,2)+pow(mouseY-0.45*height,2)<pow(0.075*width,2))
-         {
-           stanjeIzbornika = 2; 
-         }
-         
-         //je li kliknut gumb za opcije
-         if(pow(mouseX-0.4*width,2)+pow(mouseY-0.75*height,2)<pow(0.075*width,2))
-         {
-           stanjeIzbornika = 3;
-         }
-         
-         //je li kliknut gumb za izlaz
-         if(pow(mouseX-0.8*width,2)+pow(mouseY-0.75*height,2)<pow(0.075*width,2))
-         {
-           exit(); 
-         }
-      }
     }
     
     else if(stanjeIzbornika == 1)
@@ -129,4 +102,42 @@ void ucitajSvePotrebneSlikeZaIzbornik()
     opcije_znak.resize((int)(width*0.10), (int)(width*0.10));
     exit_znak = loadImage("exit_znak.png"); 
     exit_znak.resize((int)(width*0.17), (int)(width*0.17));
+}
+
+void mousePressed()
+{
+ if(stanjeIgre == 0) //u nekom smo izborniku
+      {
+        if(stanjeIzbornika == 0) //u glavnom smo izborniku
+        {
+            //je li kliknut gumb za start
+             if(pow(mouseX-0.2*width,2)+pow(mouseY-0.45*height,2)<pow(0.075*width,2)) //0.075=0.15/2
+             {
+               stanjeIzbornika = 1;
+             }
+             
+             //je li kliknut gumb za info
+             if(pow(mouseX-0.6*width,2)+pow(mouseY-0.45*height,2)<pow(0.075*width,2))
+             {
+               stanjeIzbornika = 2; 
+             }
+             
+             //je li kliknut gumb za opcije
+             if(pow(mouseX-0.4*width,2)+pow(mouseY-0.75*height,2)<pow(0.075*width,2))
+             {
+               stanjeIzbornika = 3;
+             }
+             
+             //je li kliknut gumb za izlaz
+             if(pow(mouseX-0.8*width,2)+pow(mouseY-0.75*height,2)<pow(0.075*width,2))
+             {
+               exit(); 
+             }
+        }
+        else if(stanjeIzbornika == 1 || stanjeIzbornika == 2 || stanjeIzbornika == 3) //u informacijama, opcijama ili mapi
+        {
+             if(mouseX > width/6 && mouseX < 5*width/6 && mouseY < 5*height/6 && mouseY > height/2)
+                  stanjeIzbornika = 0; 
+        }
+      } 
 }
