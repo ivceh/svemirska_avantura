@@ -11,9 +11,17 @@ int brZivota;
 int spaceshipBrojBodova, spaceshipBodoviZaIspis;
 boolean spaceshipGameOver;
 
+PFont spaceshipFont;
 
 void spaceshipSetup()
 {
+  player.close(); //zaustavi prethodnu stvar
+  player = minim.loadFile("Galactic.mp3"); //učitaj novu stvar
+  player.play(); //pokreni novu stvar
+
+  //font za igru postavljen
+  spaceshipFont = createFont("MONO.ttf", 32);
+  textFont(spaceshipFont);
   noCursor(); //makni pokazivač miša dok si u igri
   background(0);
   textSize(width/20);

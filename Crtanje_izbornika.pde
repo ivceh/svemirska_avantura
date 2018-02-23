@@ -14,9 +14,6 @@ void crtajIzbornik()
   {
     fill((int)random(255),(int)random(255),(int)random(255));
   }
-      
-  izbornikNaslovFont = createFont("SPACEBAR.ttf", 32);
-  textFont(izbornikNaslovFont);
   
   textSize(velicinaNaslova);
   image(pozadina, width/2, height/2/*, width, height*/);

@@ -2,7 +2,7 @@ import ddf.minim.*;
 
 Minim minim;
 AudioPlayer player;
-AudioInput input;
+//AudioInput input;
 //AudioMetaData meta;
 
 int uvodBrzinaPrikaza; //koliko se brzo uvod prikazuje
@@ -29,6 +29,7 @@ int uvodSlovoNaRedu;
 
 void introPocetnePostavke()
 {
+  noCursor(); //makni pokazivač miša kad si u uvodu
   //ispiši loading...
   background(0); //crna pozadina
   textSize( (width < height) ? width/20 : height/20); //veličina slova za loading...
@@ -46,7 +47,7 @@ void introPocetnePostavke()
   try {
     minim = new Minim(this);
     player = minim.loadFile("TimmyTrumpetMantra.mp3");
-    input = minim.getLineIn();
+    //input = minim.getLineIn();
     //meta = player.getMetaData();
     player.play();
   } 

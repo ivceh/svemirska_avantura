@@ -13,6 +13,9 @@ void setup()
 
   ucitajSvePotrebneSlikeZaIzbornik();
   mapaUcitajSlike(); //učitaj slike za mapu levela
+
+  //učitaj font za izbornik
+  izbornikNaslovFont = createFont("SPACEBAR.ttf", 32);
 }
 
 int stanjeIgre = 0, stanjeIzbornika = 0;
@@ -25,7 +28,7 @@ int stanjeIgre = 0, stanjeIzbornika = 0;
 //    == 3 akko smo u glavnom izborniku kliknuli na informacije, pa smo tamo
 
 float pomakIzbornika = 0;
-float easingPomakaIzbornika = 0.08;
+float easingPomakaIzbornika = 0.15;
 
 
 void draw()
@@ -35,8 +38,11 @@ void draw()
   if (stanjeIgre == -1) //crta se uvodna animacija
   {
     crtanjeUvoda();
-  } else if (stanjeIgre == 0) //u glavnom izborniku smo
+  } else if (stanjeIgre == 0) //u nekom izborniku smo
   {
+    cursor(); //u izborniku nam treba pokazivač miša, pa ga pokaži
+    textFont(izbornikNaslovFont);
+
     textAlign(CENTER);
     imageMode(CENTER);
 
@@ -203,7 +209,13 @@ void mousePressed()
       else if (pow(mouseX-2*width/3, 2)+pow(mouseY-3*height/4, 2) <= pow(exitGumb.width/2, 2))
       {
         pomakIzbornika = height;
-        stanjeIzbornika = 1;
+        stanjeIgre= 0; //Idemo u izbornik. Koji:
+        stanjeIzbornika = 1; //pa izbornik za biranje levela!
+
+        //zaustavi glazbu igre i pokreni onu od izbornika
+        player.close();
+        player = minim.loadFile("TimmyTrumpetMantra.mp3");
+        player.play();
       }
     }
   }
