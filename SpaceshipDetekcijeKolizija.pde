@@ -189,8 +189,10 @@ void detektirajUnistenjeNeprijateljskogBroda()
             }
           } else if (tipoviBrodova[i] == 1)
           {
-            //trup borda
-            if ( detekcijaMetakBrod(new float[]{0, 180, 16, 166, 60, 145, 119, 131, 190, 131, 240, 156, 285, 180, 240, 204, 190, 230, 119, 230, 60, 216, 16, 194}, 
+            //trup broda
+            if ( detekcijaMetakBrod(new float[]{0, 180, 16, 166, 60, 145, 119, 131, 
+              190, 131, 240, 156, 285, 180, 240, 
+              204, 190, 230, 119, 230, 60, 216, 16, 194}, 
               i, 285, 362, -1, j) == true )
             {
               avaiable[j] = true;
@@ -261,12 +263,119 @@ void detektirajUnistenjeNeprijateljskogBroda()
           }
         }
       }
+      //sad još za raketu
+      if (raketaDostupna == false) //ukoliko je raketa ispaljena
+      {
+        //za svaku točku iz nosača konveksne ljuske zvane raketa, provjeri pada li unutar nekog dijela nekog neprijatelja
+        float[] koordinateTocakaRakete = new float[]{0, 1, 95, 1, 115, 9, 127, 21, 115, 34, 95, 42, 0, 42}; //koordinate iz Painta
+        spaceshipPrilagodiKoordinateLika(koordinateTocakaRakete, raketaPolozaj, raketaVisina, 
+          128, 44, raketa.width, raketa.height); //prilagodim koordinate raketa koordinatama rakete na ekranu
+        for (int k=0; k<koordinateTocakaRakete.length; k=k+2)
+        {
+          if (tipoviBrodova[i] == 0)
+          {
+            //gornje krilo broda
+            if ( tockaUnutarLikaSPrilagodbomLika(koordinateTocakaRakete[k], koordinateTocakaRakete[k+1], 
+              new float[]{0, 91, 12, 58, 46, 31, 117, 0, 175, 0, 239, 19, 157, 77, 117, 89}, 
+              polozajBroda[i], visinaBroda[i], 239, 221, 
+              neprijatelji[tipoviBrodova[i]].width, neprijatelji[tipoviBrodova[i]].height) == true )
+            {
+              pokreniArmagedon();
+            }
+
+            //donje krilo broda
+            else if ( tockaUnutarLikaSPrilagodbomLika(koordinateTocakaRakete[k], koordinateTocakaRakete[k+1], 
+              new float[]{0, 129, 117, 132, 157, 143, 239, 202, 175, 221, 117, 221, 46, 190, 12, 161}, 
+              polozajBroda[i], visinaBroda[i], 239, 221, 
+              neprijatelji[tipoviBrodova[i]].width, neprijatelji[tipoviBrodova[i]].height) == true )
+            {
+              pokreniArmagedon();
+            }
+
+            //trup broda
+            else if ( tockaUnutarLikaSPrilagodbomLika(koordinateTocakaRakete[k], koordinateTocakaRakete[k+1], 
+              new float[]{10, 116, 10, 105, 32, 93, 117, 89, 148, 99, 148, 122, 117, 132, 32, 128}, 
+              polozajBroda[i], visinaBroda[i], 239, 221, 
+              neprijatelji[tipoviBrodova[i]].width, neprijatelji[tipoviBrodova[i]].height) == true )
+            {
+              pokreniArmagedon();
+            }
+
+            //rep broda
+            else if ( tockaUnutarLikaSPrilagodbomLika(koordinateTocakaRakete[k], koordinateTocakaRakete[k+1], 
+              new float[]{148, 122, 148, 99, 216, 104, 227, 108, 227, 112, 218, 115}, 
+              polozajBroda[i], visinaBroda[i], 239, 221, 
+              neprijatelji[tipoviBrodova[i]].width, neprijatelji[tipoviBrodova[i]].height) == true )
+            {
+              pokreniArmagedon();
+            }
+          } else if (tipoviBrodova[i] == 1)
+          {
+            //trup broda
+            if ( tockaUnutarLikaSPrilagodbomLika(koordinateTocakaRakete[k], koordinateTocakaRakete[k+1], 
+              new float[]{0, 180, 16, 166, 60, 145, 119, 131, 190, 131, 240, 156, 285, 180, 240, 204, 190, 230, 119, 230, 60, 216, 16, 194}, 
+              polozajBroda[i], visinaBroda[i], 285, 362, 
+              neprijatelji[tipoviBrodova[i]].width, neprijatelji[tipoviBrodova[i]].height) == true )
+            {
+              pokreniArmagedon();
+            }
+            //gornji dio gornjeg krila
+            else if ( tockaUnutarLikaSPrilagodbomLika(koordinateTocakaRakete[k], koordinateTocakaRakete[k+1], 
+              new float[]{117, 59, 150, 33, 160, 28, 188, 17, 257, 0, 184, 84}, 
+              polozajBroda[i], visinaBroda[i], 285, 362, 
+              neprijatelji[tipoviBrodova[i]].width, neprijatelji[tipoviBrodova[i]].height) == true )
+            {
+              pokreniArmagedon();
+            }
+            //donji dio gornjeg krila
+            else if ( tockaUnutarLikaSPrilagodbomLika(koordinateTocakaRakete[k], koordinateTocakaRakete[k+1], 
+              new float[]{62, 115, 117, 65, 184, 84, 237, 133}, 
+              polozajBroda[i], visinaBroda[i], 285, 362, 
+              neprijatelji[tipoviBrodova[i]].width, neprijatelji[tipoviBrodova[i]].height) == true )
+            {
+              pokreniArmagedon();
+            }
+            //gornje zakrilce
+            else if ( tockaUnutarLikaSPrilagodbomLika(koordinateTocakaRakete[k], koordinateTocakaRakete[k+1], 
+              new float[]{160, 28, 156, 8, 171, 1, 188, 17}, 
+              polozajBroda[i], visinaBroda[i], 285, 362, 
+              neprijatelji[tipoviBrodova[i]].width, neprijatelji[tipoviBrodova[i]].height) == true )
+            {
+              pokreniArmagedon();
+            }
+            //gornji dio donjeg krila
+            else if ( tockaUnutarLikaSPrilagodbomLika(koordinateTocakaRakete[k], koordinateTocakaRakete[k+1], 
+              new float[]{62, 245, 237, 227, 184, 275, 117, 294}, 
+              polozajBroda[i], visinaBroda[i], 285, 362, 
+              neprijatelji[tipoviBrodova[i]].width, neprijatelji[tipoviBrodova[i]].height) == true )
+            {
+              pokreniArmagedon();
+            }
+            //donji dio donjeg krila
+            else if ( tockaUnutarLikaSPrilagodbomLika(koordinateTocakaRakete[k], koordinateTocakaRakete[k+1], 
+              new float[]{117, 301, 184, 275, 257, 360, 188, 344, 150, 326}, 
+              polozajBroda[i], visinaBroda[i], 285, 362, 
+              neprijatelji[tipoviBrodova[i]].width, neprijatelji[tipoviBrodova[i]].height) == true )
+            {
+              pokreniArmagedon();
+            }
+            //donje zakrilce
+            else if ( tockaUnutarLikaSPrilagodbomLika(koordinateTocakaRakete[k], koordinateTocakaRakete[k+1], 
+              new float[]{159, 331, 188, 344, 172, 359, 156, 352}, 
+              polozajBroda[i], visinaBroda[i], 285, 362, 
+              neprijatelji[tipoviBrodova[i]].width, neprijatelji[tipoviBrodova[i]].height) == true )
+            {
+              pokreniArmagedon();
+            }
+          }
+        }
+      }
     }
   }
 }
 
 
-void detektirajPogodakTenka()
+void detektirajPogodakTenka() //metkom ili raketom
 {
   for (int j=0; j < ukupnoMetakaDostupno; ++j) //za svaki moj metak
   {
@@ -284,6 +393,32 @@ void detektirajPogodakTenka()
     }
   }
 
+  //za raketu - ako je ispaljena
+  if (raketaDostupna == false) {
+    //za svaku točku iz nosača konveksne ljuske zvane raketa, provjeri pada li unutar nekog dijela nekog neprijatelja
+    float[] koordinateTocakaRakete = new float[]{0, 1, 95, 1, 115, 9, 127, 21, 115, 34, 95, 42, 0, 42}; //koordinate iz Painta
+    spaceshipPrilagodiKoordinateLika(koordinateTocakaRakete, raketaPolozaj, raketaVisina, 
+      128, 44, raketa.width, raketa.height); //prilagodim koordinate raketa koordinatama rakete na ekranu
+    for (int k=0; k<koordinateTocakaRakete.length; k=k+2) {
+      //glava tenka
+      if ( tockaUnutarLikaSPrilagodbomLika(koordinateTocakaRakete[k], koordinateTocakaRakete[k+1], 
+        new float[]{76, 73, 76, 50, 81, 30, 90, 12, 105, 0, 160, 0, 176, 15, 187, 72}, 
+        polozajTenka, visinaTenka, 281, 267, 
+        tenkTijelo[0].width, tenkTijelo[0].height) == true )
+      {
+        pokreniArmagedon();
+      }
+      //tijelo tenka
+      else if ( tockaUnutarLikaSPrilagodbomLika(koordinateTocakaRakete[k], koordinateTocakaRakete[k+1], 
+        new float[]{61, 82, 203, 82, 239, 115, 234, 230, 216, 266, 0, 38, 266, 12, 251, 218, 13, 150}, 
+        polozajTenka, visinaTenka, 281, 267, 
+        tenkTijelo[0].width, tenkTijelo[0].height) == true )
+      {
+        pokreniArmagedon();
+      }
+    }
+  }
+
   if (tenkLives <=0)
   {
     //malo veća eksplozija za tenk (tj. tri male eksplozije)
@@ -297,6 +432,23 @@ void detektirajPogodakTenka()
 }
 
 
+boolean tockaUnutarLikaSPrilagodbomLika(float tockaX, float tockaY, float[] praveKoordLika, float polozajLikaX, float polozajLikaY, 
+  float originalDimenzijaX, float originalDimenzijaY, float dimenzijaSadaX, float dimenzijaSadaY)
+{
+  spaceshipPrilagodiKoordinateLika(praveKoordLika, polozajLikaX, polozajLikaY, originalDimenzijaX, originalDimenzijaY, dimenzijaSadaX, dimenzijaSadaY);
+  float[] koordinateZaProslijediti = new float[praveKoordLika.length+2];
+  koordinateZaProslijediti[0] = tockaX;
+  koordinateZaProslijediti[1] = tockaY;
+  for (int z=0; z<praveKoordLika.length; ++z)
+    koordinateZaProslijediti[z+2] = praveKoordLika[z];
+
+  try {
+    return tockaUnutarLika(koordinateZaProslijediti);
+  } 
+  catch(Exception e) {
+    return false;
+  }
+}
 
 
 //provjerava nalazi li se tocka s koordinatama (tockaX, tockaY)

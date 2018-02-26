@@ -46,7 +46,8 @@ void crtajMapu() {
   textSize(slikeLevela[0].width/3);
   textAlign(CENTER, CENTER);
 
-  image(mapaLevelaPozadina, width/2, height/2);
+  //zakomentirano radi performansi
+  //image(mapaLevelaPozadina, width/2, height/2);
 
 
   fill(255); //bijeli brojevi na planetima

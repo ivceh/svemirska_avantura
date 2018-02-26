@@ -2,6 +2,8 @@ PImage spaceship, restartGumb, exitGumb;
 int polozajX, polozajY; //polozaj broda
 int brzinaBroda; //koja je brzina broda
 
+int spaceShipStanjeArmagedona = 0;
+
 PImage[] zivotiBrod = new PImage[3];
 int brZivota;
 
@@ -130,6 +132,13 @@ void spaceship()
     //nacrtaj gumb za izlaz (izbornik levela)
     image(exitGumb, 2*width/3, 3*height/4);
   }
+
+  if (spaceShipStanjeArmagedona>0)
+  {
+    fill(255, 255, 0, spaceShipStanjeArmagedona*2);
+    rect(width/2, height/2, width, height);
+    --spaceShipStanjeArmagedona;
+  }
 }
 
 
@@ -241,3 +250,41 @@ void crtajBrod()
  {
  
  } */
+
+void pokreniArmagedon()
+{
+  if (raketaDostupna == false) //ako je raketa ispucana
+  {
+    //promjena zaslona ekrana
+    spaceShipStanjeArmagedona = 50;
+
+    //uništi raketu (iskorištena je)
+    raketaDostupna = true;
+
+    //uništi sve brodove na ekranu i tenku oduzmi tri života
+    for (int i=0; i<ukupnoNeprijateljskihBrodova; ++i) //za svaki neprijateljski brod
+    {
+      if (trenutnoAktivniBrodovi[i] == true) //samo za one brodove koji još postoje
+      {
+        trenutnoAktivniBrodovi[i] = false;
+        spaceshipDodajEksploziju(polozajBroda[i], visinaBroda[i]);
+        spaceshipBrojBodova += 5;
+      }
+    }
+
+    if (polozajTenka <= krajnjiPolozajTenka) //ako tenk nema štit
+    {
+      tenkLives = tenkLives - 3;
+      if (tenkLives <=0)
+      {
+        //malo veća eksplozija za tenk (tj. tri male eksplozije)
+        spaceshipDodajEksploziju(polozajTenka, visinaTenka+tenkTijelo[0].height/4);
+        spaceshipDodajEksploziju(polozajTenka-tenkTijelo[0].width/4, visinaTenka-tenkTijelo[0].height/4);
+        spaceshipDodajEksploziju(polozajTenka+tenkTijelo[0].width/4, visinaTenka-tenkTijelo[0].height/4);
+        polozajTenka = 4*width;
+        spaceshipBrojBodova += 50; //za uništenje tenka dobiva se 50 bodova
+        tenkLives = maxTenkLives;
+      }
+    }
+  }
+}

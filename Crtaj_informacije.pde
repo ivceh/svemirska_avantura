@@ -1,7 +1,8 @@
 void crtajInformacije()
 {
+  //pozadine zakomentirane zbog performansi
   //background(0);
-  image(pozadina, width/2, height/2/*, width, height*/);
+  //image(pozadina, width/2, height/2/*, width, height*/);
   textSize(width/40);
   fill(0,0,255); //plavo
   text("Neke info, ispod gumb za povratak.",width/2,height/3);

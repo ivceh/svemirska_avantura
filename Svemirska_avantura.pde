@@ -46,7 +46,6 @@ void draw()
     textAlign(CENTER);
     imageMode(CENTER);
 
-    translate(0, pomakIzbornika);
     if (pomakIzbornika>0)
       pomakIzbornika = pomakIzbornika - easingPomakaIzbornika*pomakIzbornika - height/200.0;
     else
@@ -54,15 +53,23 @@ void draw()
 
     if (stanjeIzbornika == 0)
     {
+      image(pozadina, width/2, height/2);
+      translate(0, pomakIzbornika);
       crtajIzbornik();
     } else if (stanjeIzbornika == 1)
     {
+      image(mapaLevelaPozadina, width/2, height/2);
+      translate(0, pomakIzbornika);
       crtajMapu();
     } else if (stanjeIzbornika == 2)
     {
+      image(pozadina, width/2, height/2);
+      translate(0, pomakIzbornika);
       crtajInformacije();
     } else if (stanjeIzbornika == 3)
     {
+      image(pozadina, width/2, height/2);
+      translate(0, pomakIzbornika);
       crtajOpcije();
     }
   } else if (stanjeIgre == 1)

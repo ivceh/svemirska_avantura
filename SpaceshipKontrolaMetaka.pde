@@ -22,7 +22,7 @@ void ucitajStreljivo()
 
   vrijemePotrebnoZaPunjenje = 20;
 
-  vrijemePotrebnoZaRaketu = 200;
+  vrijemePotrebnoZaRaketu = 400;
   punimRaketu = vrijemePotrebnoZaRaketu;
 
   //na početku nema metaka na ekranu - svi su dostupni
@@ -59,7 +59,7 @@ void pucaj()
       }
     } else if (mouseButton == RIGHT && punimRaketu == 0)//ide raketa
     {
-      raketaVisina = polozajY+spaceship.height/4;
+      raketaVisina = polozajY+spaceship.height/4-(height-polozajY)/5;
       raketaPolozaj = polozajX + spaceship.width/4;
       raketaDostupna = false;
       punimRaketu = vrijemePotrebnoZaRaketu;
@@ -80,7 +80,7 @@ void pucaj()
   //iscrtam raketu ako je ispaljena
   if (raketaDostupna == false)
   {
-    image(raketa, raketaPolozaj, raketaVisina);
+    image(raketa, raketaPolozaj, raketaVisina+(height-polozajY)/5);
     raketaPolozaj += brzinaRakete;
     if (raketaPolozaj > width+raketa.width) //raketa izašla iz ekrana
       raketaDostupna = true;

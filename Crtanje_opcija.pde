@@ -1,7 +1,7 @@
 void crtajOpcije()
 {
   //background(0);
-  image(pozadina, width/2, height/2/*, width, height*/);
+  //image(pozadina, width/2, height/2/*, width, height*/);
   textSize(width/40);
   fill(50,124,0);
   text("Neke opcije, ispod gumb za povratak.",width/2,height/3);

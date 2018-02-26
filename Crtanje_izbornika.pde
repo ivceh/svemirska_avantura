@@ -16,7 +16,8 @@ void crtajIzbornik()
   }
   
   textSize(velicinaNaslova);
-  image(pozadina, width/2, height/2/*, width, height*/);
+  //zakomentirano radi performansi
+  //image(pozadina, width/2, height/2/*, width, height*/);
   text("SVEMIRSKA AVANTURA", width/2, height/5);
   
   image(mars, width*0.2,height*0.45/*, width*0.15, width*0.15*/);
