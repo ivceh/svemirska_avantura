@@ -1,6 +1,5 @@
 PImage pozadina, 
-  mars, venera, neptun, pluton, 
-  start_znak, info_znak, opcije_znak, exit_znak;
+  mars, venera, neptun, pluton;
 
 void setup()
 {
@@ -101,14 +100,6 @@ void ucitajSvePotrebneSlikeZaIzbornik()
   neptun.resize((int)(width*0.15), (int)(width*0.15));
   pluton = loadImage("pluton.png"); 
   pluton.resize((int)(width*0.15), (int)(width*0.15));
-  start_znak = loadImage("start_znak.png"); 
-  start_znak.resize((int)(width*0.15), (int)(width*0.15));
-  info_znak = loadImage("info_znak.png"); 
-  info_znak.resize((int)(width*0.185), (int)(width*0.185));
-  opcije_znak = loadImage("opcije_znak.png"); 
-  opcije_znak.resize((int)(width*0.10), (int)(width*0.10));
-  exit_znak = loadImage("exit_znak.png"); 
-  exit_znak.resize((int)(width*0.17), (int)(width*0.17));
 }
 
 void mousePressed()
