@@ -10,7 +10,7 @@ int brZivota;
 //import processing.sound.*;
 //SoundFile file;
 
-int spaceshipBrojBodova, spaceshipBodoviZaIspis;
+int brojBodova, spaceshipBodoviZaIspis;
 boolean spaceshipGameOver;
 
 PFont spaceshipFont;
@@ -115,22 +115,9 @@ void spaceship()
   } else //funkcija spaceshipIspisiRezultat brine o prelasku u stanje GAME OVER
   {      
     spaceshipCrtajEksplozije(); //one koje su preostale
-    fill(0);
-    rectMode(CENTER); //pravokutnik - središte x, y, širina, visina
-    rect(width/2, height/2, 4*width/5, height/2);
-    fill(255);
-    textAlign(CENTER, BOTTOM);
-    int spaceshipGameOverVelicinaSlova = (width > height ? height : width )/10;
-    textSize(spaceshipGameOverVelicinaSlova);
-    text("GAME OVER", width/2, height/2);
-    fill(255, 255, 0); //žuta boja
-    textAlign(CENTER, TOP);
-    text("Ostvareni bodovi: "+spaceshipBrojBodova, width/2, height/2);
-
-    //nacrtaj gumb za restart
-    image(restartGumb, width/3, 3*height/4);
-    //nacrtaj gumb za izlaz (izbornik levela)
-    image(exitGumb, 2*width/3, 3*height/4);
+    
+    //ispis teksta GAME OVER, broja bodova, spremanje rezultata, top ljestvica
+    crtajGameOverFormu();
   }
 
   if (spaceShipStanjeArmagedona>0)
@@ -148,7 +135,7 @@ void spaceshipIspisiRezultat()
   textAlign(RIGHT, TOP);
   textSize(width/30);
   text(spaceshipBodoviZaIspis, width-width/60, width/60);
-  if (spaceshipBodoviZaIspis < spaceshipBrojBodova)
+  if (spaceshipBodoviZaIspis < brojBodova)
     ++spaceshipBodoviZaIspis;
   if (brZivota<=0)
   {
@@ -183,15 +170,9 @@ void ucitajBrod()
 
   //postavim broj života broda
   brZivota = 3;
-  spaceshipBrojBodova = 0; //početni rezultat na 0
+  brojBodova = 0; //početni rezultat na 0
   spaceshipGameOver = false;
   spaceshipBodoviZaIspis = 0; //početno se ispiše 0 bodova
-
-  restartGumb = loadImage("restartButton.png");
-  restartGumb.resize((width>height) ? height/4 : width/4, (width>height) ? height/4 : width/4);
-
-  exitGumb = loadImage("exitButton.png");
-  exitGumb.resize((width>height) ? height/4 : width/4, (width>height) ? height/4 : width/4);
 }
 
 void crtajBrod()
@@ -268,7 +249,7 @@ void pokreniArmagedon()
       {
         trenutnoAktivniBrodovi[i] = false;
         spaceshipDodajEksploziju(polozajBroda[i], visinaBroda[i]);
-        spaceshipBrojBodova += 5;
+        brojBodova += 5;
       }
     }
 
@@ -282,7 +263,7 @@ void pokreniArmagedon()
         spaceshipDodajEksploziju(polozajTenka-tenkTijelo[0].width/4, visinaTenka-tenkTijelo[0].height/4);
         spaceshipDodajEksploziju(polozajTenka+tenkTijelo[0].width/4, visinaTenka-tenkTijelo[0].height/4);
         polozajTenka = 4*width;
-        spaceshipBrojBodova += 50; //za uništenje tenka dobiva se 50 bodova
+        brojBodova += 50; //za uništenje tenka dobiva se 50 bodova
         tenkLives = maxTenkLives;
       }
     }

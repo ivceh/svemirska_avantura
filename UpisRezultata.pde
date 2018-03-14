@@ -111,7 +111,7 @@ void spremiRezultat(String igrac, int bodovi, int idIgre) {
   }
 
   //igrac ne smije biti prazno
-  if (igrac == "") {
+  if (igrac.equals("") == true) {
     println("---Pokusao spremiti prazno ime igraca. Ne spremam nista.");
     return;
   }

@@ -155,7 +155,7 @@ void detektirajUnistenjeNeprijateljskogBroda()
               avaiable[j] = true;
               trenutnoAktivniBrodovi[i] = false;
               spaceshipDodajEksploziju(polozajBroda[i], visinaBroda[i]);
-              spaceshipBrojBodova += 5;
+              brojBodova += 5;
             }
 
             //donje krilo broda
@@ -165,7 +165,7 @@ void detektirajUnistenjeNeprijateljskogBroda()
               avaiable[j] = true;
               trenutnoAktivniBrodovi[i] = false;
               spaceshipDodajEksploziju(polozajBroda[i], visinaBroda[i]);
-              spaceshipBrojBodova += 5;
+              brojBodova += 5;
             }
 
             //trup broda
@@ -175,7 +175,7 @@ void detektirajUnistenjeNeprijateljskogBroda()
               avaiable[j] = true;
               trenutnoAktivniBrodovi[i] = false;
               spaceshipDodajEksploziju(polozajBroda[i], visinaBroda[i]);
-              spaceshipBrojBodova += 5;
+              brojBodova += 5;
             }
 
             //rep broda
@@ -185,7 +185,7 @@ void detektirajUnistenjeNeprijateljskogBroda()
               avaiable[j] = true;
               trenutnoAktivniBrodovi[i] = false;
               spaceshipDodajEksploziju(polozajBroda[i], visinaBroda[i]);
-              spaceshipBrojBodova += 5;
+              brojBodova += 5;
             }
           } else if (tipoviBrodova[i] == 1)
           {
@@ -198,7 +198,7 @@ void detektirajUnistenjeNeprijateljskogBroda()
               avaiable[j] = true;
               trenutnoAktivniBrodovi[i] = false;
               spaceshipDodajEksploziju(polozajBroda[i], visinaBroda[i]);
-              spaceshipBrojBodova += 10;
+              brojBodova += 10;
             }
 
             //gornji dio gornjeg krila
@@ -208,7 +208,7 @@ void detektirajUnistenjeNeprijateljskogBroda()
               avaiable[j] = true;
               trenutnoAktivniBrodovi[i] = false;
               spaceshipDodajEksploziju(polozajBroda[i], visinaBroda[i]);
-              spaceshipBrojBodova += 10;
+              brojBodova += 10;
             }
 
             //donji dio gornjeg krila
@@ -218,7 +218,7 @@ void detektirajUnistenjeNeprijateljskogBroda()
               avaiable[j] = true;
               trenutnoAktivniBrodovi[i] = false;
               spaceshipDodajEksploziju(polozajBroda[i], visinaBroda[i]);
-              spaceshipBrojBodova += 10;
+              brojBodova += 10;
             }
 
             //gornje zakrilce
@@ -228,7 +228,7 @@ void detektirajUnistenjeNeprijateljskogBroda()
               avaiable[j] = true;
               trenutnoAktivniBrodovi[i] = false;
               spaceshipDodajEksploziju(polozajBroda[i], visinaBroda[i]);
-              spaceshipBrojBodova += 10;
+              brojBodova += 10;
             }
 
             //gornji dio donjeg krila
@@ -238,7 +238,7 @@ void detektirajUnistenjeNeprijateljskogBroda()
               avaiable[j] = true;
               trenutnoAktivniBrodovi[i] = false;
               spaceshipDodajEksploziju(polozajBroda[i], visinaBroda[i]);
-              spaceshipBrojBodova += 10;
+              brojBodova += 10;
             }
 
             //donji dio donjeg krila
@@ -248,7 +248,7 @@ void detektirajUnistenjeNeprijateljskogBroda()
               avaiable[j] = true;
               trenutnoAktivniBrodovi[i] = false;
               spaceshipDodajEksploziju(polozajBroda[i], visinaBroda[i]);
-              spaceshipBrojBodova += 10;
+              brojBodova += 10;
             }
 
             //donje zakrilce
@@ -258,7 +258,7 @@ void detektirajUnistenjeNeprijateljskogBroda()
               avaiable[j] = true;
               trenutnoAktivniBrodovi[i] = false;
               spaceshipDodajEksploziju(polozajBroda[i], visinaBroda[i]);
-              spaceshipBrojBodova += 10;
+              brojBodova += 10;
             }
           }
         }
@@ -426,7 +426,7 @@ void detektirajPogodakTenka() //metkom ili raketom
     spaceshipDodajEksploziju(polozajTenka-tenkTijelo[0].width/4, visinaTenka-tenkTijelo[0].height/4);
     spaceshipDodajEksploziju(polozajTenka+tenkTijelo[0].width/4, visinaTenka-tenkTijelo[0].height/4);
     polozajTenka = 4*width;
-    spaceshipBrojBodova += 50; //za uništenje tenka dobiva se 50 bodova
+    brojBodova += 50; //za uništenje tenka dobiva se 50 bodova
     tenkLives = maxTenkLives;
   }
 }

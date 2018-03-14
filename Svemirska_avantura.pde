@@ -100,6 +100,15 @@ void ucitajSvePotrebneSlikeZaIzbornik()
   neptun.resize((int)(width*0.15), (int)(width*0.15));
   pluton = loadImage("pluton.png"); 
   pluton.resize((int)(width*0.15), (int)(width*0.15));
+  
+  restartGumb = loadImage("restartButton.png");
+  restartGumb.resize((width>height) ? height/4 : width/4, (width>height) ? height/4 : width/4);
+
+  exitGumb = loadImage("exitButton.png");
+  exitGumb.resize((width>height) ? height/4 : width/4, (width>height) ? height/4 : width/4);
+
+  saveGumb = loadImage("saveButton.png");
+  saveGumb.resize((width>height) ? height/4 : width/4, (width>height) ? height/4 : width/4);
 }
 
 void mousePressed()
@@ -147,6 +156,7 @@ void mousePressed()
           case 0:
             println("Odabrana igra 1");
             //stanjeIgre = 1;
+            ucitajTopListu(); //pogledaj top rezultate za tu igru
             //početne postavke za igru 1
             //...
             //pokreni igru 1
@@ -155,6 +165,7 @@ void mousePressed()
           case 1:
             println("Odabrana igra 2");
             //stanjeIgre = 2;
+            ucitajTopListu(); //pogledaj top rezultate za tu igru
             //početne postavke za igru 2
             //...
             //pokreni igru 2
@@ -163,6 +174,7 @@ void mousePressed()
           case 2:
             println("Odabrana igra 3");
             stanjeIgre = 3;
+            ucitajTopListu(); //pogledaj top rezultate za tu igru
             //početne postavke za igru 3
             spaceshipSetup();
             //pokreni igru 3
@@ -198,15 +210,17 @@ void mousePressed()
     if (spaceshipGameOver == true) //nastupio je Game Over za igru Spaceship
     {
       //ukoliko je klinuto na gumb za restart, ponovo pokreni igru
-      if (pow(mouseX-width/3, 2)+pow(mouseY-3*height/4, 2) <= pow(restartGumb.width/2, 2))
+      if (pow(mouseX-width/4, 2)+pow(mouseY-0.8*height, 2) <= pow(restartGumb.width/2, 2))
       {
         spaceshipGameOver = false;
+        imeIgraca = ""; //očisti ime igrača
         spaceshipSetup();
       }
       //ukoliko je kliknuto na gumb za exit, odi na izbornik levela
-      else if (pow(mouseX-2*width/3, 2)+pow(mouseY-3*height/4, 2) <= pow(exitGumb.width/2, 2))
+      else if (pow(mouseX-3*width/4, 2)+pow(mouseY-0.8*height, 2) <= pow(exitGumb.width/2, 2))
       {
         pomakIzbornika = height;
+        imeIgraca = ""; //očisti ime igrača
         stanjeIgre= 0; //Idemo u izbornik. Koji:
         stanjeIzbornika = 1; //pa izbornik za biranje levela!
 
@@ -214,6 +228,16 @@ void mousePressed()
         player.close();
         player = minim.loadFile("TimmyTrumpetMantra.mp3");
         player.play();
+      }
+      //ukoliko je kliknuto na gumb za save, spremi rezultat
+      else if(pow(mouseX-width/2, 2)+pow(mouseY-0.8*height,2) <= pow(saveGumb.width/2, 2) && brojBodova>0)
+      {
+        spremiRezultat(imeIgraca, brojBodova, stanjeIgre);
+        if(imeIgraca.equals("") == false) {
+           imeIgraca = "";
+           brojBodova = 0;
+           ucitajTopListu();
+        }
       }
     }
   }
