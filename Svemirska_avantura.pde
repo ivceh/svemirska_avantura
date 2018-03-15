@@ -100,7 +100,7 @@ void ucitajSvePotrebneSlikeZaIzbornik()
   neptun.resize((int)(width*0.15), (int)(width*0.15));
   pluton = loadImage("pluton.png"); 
   pluton.resize((int)(width*0.15), (int)(width*0.15));
-  
+
   restartGumb = loadImage("restartButton.png");
   restartGumb.resize((width>height) ? height/4 : width/4, (width>height) ? height/4 : width/4);
 
@@ -227,16 +227,17 @@ void mousePressed()
         //zaustavi glazbu igre i pokreni onu od izbornika
         player.close();
         player = minim.loadFile("TimmyTrumpetMantra.mp3");
-        player.play();
+        //player.play();
+        player.loop(); //želimo da se glazba ponavlja
       }
       //ukoliko je kliknuto na gumb za save, spremi rezultat
-      else if(pow(mouseX-width/2, 2)+pow(mouseY-0.8*height,2) <= pow(saveGumb.width/2, 2) && brojBodova>0)
+      else if (pow(mouseX-width/2, 2)+pow(mouseY-0.8*height, 2) <= pow(saveGumb.width/2, 2) && brojBodova>0)
       {
         spremiRezultat(imeIgraca, brojBodova, stanjeIgre);
-        if(imeIgraca.equals("") == false) {
-           imeIgraca = "";
-           brojBodova = 0;
-           ucitajTopListu();
+        if (imeIgraca.equals("") == false) {
+          imeIgraca = "";
+          brojBodova = 0;
+          ucitajTopListu();
         }
       }
     }

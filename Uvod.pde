@@ -49,7 +49,8 @@ void introPocetnePostavke()
     player = minim.loadFile("TimmyTrumpetMantra.mp3");
     //input = minim.getLineIn();
     //meta = player.getMetaData();
-    player.play();
+    //player.play();
+    player.loop(); //želimo da se glazba ponavlja
   } 
   catch (Exception e) {
   }

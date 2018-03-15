@@ -19,7 +19,8 @@ void spaceshipSetup()
 {
   player.close(); //zaustavi prethodnu stvar
   player = minim.loadFile("Galactic.mp3"); //učitaj novu stvar
-  player.play(); //pokreni novu stvar
+  //player.play(); //pokreni novu stvar
+  player.loop(); //glazba se ponavlja
 
   //font za igru postavljen
   spaceshipFont = createFont("MONO.ttf", 32);
