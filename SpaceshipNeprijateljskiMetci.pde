@@ -33,10 +33,15 @@ void ucitajNeprijateljskeMetke()
 
 void ispaliNeprijateljskiMetak(int polozajIspaljivanja, int visinaIspaljivanja, int tipMetka)
 {
-  int smjerIspaleMetka=1, preostaloZaIspalu=3;
+  //preostalo za ispalu treba jer žuti avioni ispaljuju 3 metak
+  int smjerIspaleMetka=1, preostaloZaIspalu=3; //smjer metak (1 gore, 0 ravno, -1 dolje)
 
   for (int i=0; i<neprijateljskihMetakaDostupno; ++i)
   {
+    if (preostaloZaIspalu == 0) { //ako nemaš što ispaliti prekini
+      return;
+    }
+
     if (avaiableEnemyBullets[i] == false) //ima neki dostupan metak koji se ne crta
     {
       visineNeprijateljskihMetaka[i] = visinaIspaljivanja;
@@ -48,9 +53,8 @@ void ispaliNeprijateljskiMetak(int polozajIspaljivanja, int visinaIspaljivanja, 
         smjerNeprijateljskihMetaka[i] = smjerIspaleMetka;
         --smjerIspaleMetka;
         --preostaloZaIspalu;
-      } else
-      {
-        i = neprijateljskihMetakaDostupno; //ovo izlazi iz for petlje
+      } else { //ako tip metka 0 (1 več ispalili) ili nema više što za ispalu
+        return;
       }
     }
   }
