@@ -1,14 +1,14 @@
-PImage spaceship, restartGumb, exitGumb;
+PImage spaceship, restartGumb, exitGumb, spaceshipShield;
 int polozajX, polozajY; //polozaj broda
 int brzinaBroda; //koja je brzina broda
 
 int spaceShipStanjeArmagedona = 0;
+int spaceshipMaxTrajanjeStita = 180, 
+  spaceshipTrajanjeStita;
 
 PImage[] zivotiBrod = new PImage[3];
 int brZivota;
 
-//import processing.sound.*;
-//SoundFile file;
 
 int brojBodova, spaceshipBodoviZaIspis;
 boolean spaceshipGameOver;
@@ -19,7 +19,6 @@ void spaceshipSetup()
 {
   player.close(); //zaustavi prethodnu stvar
   player = minim.loadFile("Galactic.mp3"); //učitaj novu stvar
-  //player.play(); //pokreni novu stvar
   player.loop(); //glazba se ponavlja
 
   //font za igru postavljen
@@ -29,13 +28,6 @@ void spaceshipSetup()
   background(0);
   textSize(width/20);
   text("loading...", width/20, height/2);
-
-  //try {    
-  //  file = new SoundFile(this, "Galactic.mp3");
-  //  file.play();
-  //} 
-  //catch (Exception e) {
-  //}
 
   imageMode(CENTER);
 
@@ -105,7 +97,26 @@ void spaceship()
     kontrolaNeprijatelja();
     crtajNeprijateljskeMetke();
     detektirajUnistenjeNeprijateljskogBroda();
-    detektirajGubitakZivota(); //je li me netko pogodio
+    if (spaceshipTrajanjeStita > 0) {
+      //ako imam štit, crtam ga, nitko me ne može pogoditi
+      --spaceshipTrajanjeStita;
+      //crtam prikaz (u obliku luka oko broda) koliko još štit traje
+      noFill(); //bez ispune
+      stroke(0, 0, 255); //plava crta
+      strokeWeight(spaceship.width/20+1); //debljina crte
+      arc(polozajX, polozajY,
+        spaceship.width, spaceship.width, 
+        radians(-90), radians(-90+spaceshipTrajanjeStita*(360/spaceshipMaxTrajanjeStita)));
+      //crtam sliku štita oko broda
+      image(spaceshipShield, polozajX, polozajY);
+
+      //vrati kako je bilo prije
+      stroke(0);
+      strokeWeight(1);
+    } else { //nemam štit
+      detektirajGubitakZivota(); //pogledam je li me netko pogodio
+    }
+
     crtajTenk();
 
     if (polozajTenka <= krajnjiPolozajTenka)
@@ -116,7 +127,7 @@ void spaceship()
   } else //funkcija spaceshipIspisiRezultat brine o prelasku u stanje GAME OVER
   {      
     spaceshipCrtajEksplozije(); //one koje su preostale
-    
+
     //ispis teksta GAME OVER, broja bodova, spremanje rezultata, top ljestvica
     crtajGameOverFormu();
   }
@@ -143,12 +154,6 @@ void spaceshipIspisiRezultat()
     spaceshipGameOver = true;
     spaceshipDodajEksploziju(polozajX, polozajY);
     cursor(); //pokaži pokazivač miša da bi korisnik mogao kliknuti neki gumb
-    //try { 
-    //  file.stop();
-    //} 
-    //catch(Exception e) {
-    //} //zaustavi sviranje glazbe
-    //eventualno tu počinje neka glazba kod prikaza Game Overa
   }
 }
 
@@ -158,6 +163,12 @@ void ucitajBrod()
 {
   spaceship = loadImage("spaceship.png");
   spaceship.resize(width/10, width/20);
+
+  spaceshipShield = loadImage("tenkShield.png"); //učitaj sliku štita od broda
+  spaceshipShield.resize(spaceship.width, spaceship.width);
+
+  spaceshipTrajanjeStita = spaceshipMaxTrajanjeStita; //početno aktiviraj štit
+
 
   for (int i=0; i<3; ++i)
   {
@@ -228,10 +239,6 @@ void crtajBrod()
     spaceship.height/10);
 }
 
-/* void stop()
- {
- 
- } */
 
 void pokreniArmagedon()
 {

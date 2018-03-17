@@ -1,5 +1,3 @@
-Boolean kolizijaTempVarijabla;
-
 //da bi mogao samo iz Paint-a pročitati koordinate svog lika
 //bez da moram svaku posebno prilagođavati dimenziji i trenutnom položaju
 void spaceshipPrilagodiKoordinateLika(float[] primljeneKoordinate, float polozajLikaX, float polozajLikaY, 
@@ -110,6 +108,7 @@ void detektirajGubitakZivota()
         avaiableEnemyBullets[i] = false; //metak se više ne crta
         //println("izgubio život: " + (brZivotaIzgubljen++));
         --brZivota;
+        spaceshipTrajanjeStita = spaceshipMaxTrajanjeStita; //aktiviraj štit
       }
     }
   }
@@ -131,6 +130,7 @@ void detektirajGubitakZivota()
       bombaIspaljena = false; //bomba se više ne crta
       //println("pogođen bombom: " + (brZivotaIzgubljen++));
       --brZivota;
+      spaceshipTrajanjeStita = spaceshipMaxTrajanjeStita; //aktiviraj štit
     }
   }
 }

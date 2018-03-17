@@ -2,8 +2,6 @@ import ddf.minim.*;
 
 Minim minim;
 AudioPlayer player;
-//AudioInput input;
-//AudioMetaData meta;
 
 int uvodBrzinaPrikaza; //koliko se brzo uvod prikazuje
 //slike koje se koriste u uvodu
@@ -47,9 +45,6 @@ void introPocetnePostavke()
   try {
     minim = new Minim(this);
     player = minim.loadFile("TimmyTrumpetMantra.mp3");
-    //input = minim.getLineIn();
-    //meta = player.getMetaData();
-    //player.play();
     player.loop(); //želimo da se glazba ponavlja
   } 
   catch (Exception e) {
@@ -109,7 +104,6 @@ void crtanjeUvoda()
     uvodKutRotacije += uvodBrzinaPrikaza*3; //koliko se brzo krug rotira
     if (uvodKutRotacije >= 720) //uvod je gotov kad se krug dva puta zarotira (2*360)
     {
-      //exit();
       ++stanjeIgre; // tj. stanjeIgre == 1 --> prelazimo na glavni izbornik
     }
     rotate(radians(uvodKutRotacije)); //rotiram krug od početnog položaja za uvodKutRotacije (konv. u radijane!)
