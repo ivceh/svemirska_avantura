@@ -164,12 +164,9 @@ void mousePressed()
             break;
           case 1:
             println("Odabrana igra 2");
-<<<<<<< HEAD
             //stanjeIgre = 2;
             ucitajTopListu(); //pogledaj top rezultate za tu igru
-=======
             stanjeIgre = 2;
->>>>>>> Dodana igra Pacman
             //početne postavke za igru 2
             pacmanSetup();
             //pokreni igru 2
