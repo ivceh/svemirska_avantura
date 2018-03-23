@@ -80,7 +80,7 @@ void draw()
   } else if (stanjeIgre == 2)
   {
     //ovdje se poziva funkcija (tj. igra) za 2. level
-    crtajIgru2();
+    crtajPacmana();
   } else if (stanjeIgre == 3)
   {
     //ovdje se poziva funkcija (tj. igra) za 3. level
@@ -168,10 +168,11 @@ void mousePressed()
             println("Odabrana igra 2");
             //stanjeIgre = 2;
             ucitajTopListu(); //pogledaj top rezultate za tu igru
+            stanjeIgre = 2;
             //početne postavke za igru 2
-            //...
+            pacmanSetup();
             //pokreni igru 2
-            //...
+            pacman();
             break;
           case 2:
             println("Odabrana igra 3");
