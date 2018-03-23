@@ -7,11 +7,13 @@ void setup()
 
   introPocetnePostavke(); //ovo će i ispisati loading...
 
-  stanjeIgre = -1; //na početku smo u uvodnoj animaciji
-  stanjeIzbornika = 0; //za izbornik, počinjemo od glavnog izbornika
+  stanjeIgre = -1; //na početku smo u uvodnoj animaciji 
+  stanjeIzbornika = 0; //za izbornik, počinjemo od glavnog izbornika 
 
   ucitajSvePotrebneSlikeZaIzbornik();
   mapaUcitajSlike(); //učitaj slike za mapu levela
+
+  ucitajPodatkeZaInfoMenu();
 
   //učitaj font za izbornik
   izbornikNaslovFont = createFont("SPACEBAR.ttf", 32);
@@ -74,7 +76,7 @@ void draw()
   } else if (stanjeIgre == 1)
   {
     //ovdje se poziva funkcija (tj. igra) za 1. level
-    crtajIgru1();
+    race();
   } else if (stanjeIgre == 2)
   {
     //ovdje se poziva funkcija (tj. igra) za 2. level
@@ -155,12 +157,12 @@ void mousePressed()
           switch (i) {
           case 0:
             println("Odabrana igra 1");
-            //stanjeIgre = 1;
+            stanjeIgre = 1;
             ucitajTopListu(); //pogledaj top rezultate za tu igru
             //početne postavke za igru 1
-            //...
+            raceSetup();
             //pokreni igru 1
-            //...
+            race();
             break;
           case 1:
             println("Odabrana igra 2");
@@ -197,11 +199,62 @@ void mousePressed()
         pomakIzbornika = height;
         stanjeIzbornika = 0;
       }
+      
+      if(true)//u meniju informacije smo 
+      { //reakcija na gumb za povratak je ista za info i opcije 
+        //reakcija na strelice
+        //ako klikne na desnu strelicu
+        if((pow(mouseX-21*width/24, 2)+pow(mouseY-6*height/7, 2)) < pow(height/12,2))
+        {
+          brojIgreZaPrikaz=(brojIgreZaPrikaz+1)%3;
+        }
+        //ako klikne na lijevu strelicu
+        else if((pow(mouseX-width/8, 2)+pow(mouseY-6*height/7, 2)) < pow(height/12,2))
+        {
+          brojIgreZaPrikaz=(brojIgreZaPrikaz+2)%3; //+2= +3 -1 = -1 mod 3 ___ da izbjegnem modulo s negativnim brojevima
+        }
+      }
+      
     }
   }
   //nedostaje if ako sam u igri 1
-  //else if(stanjeIgre == 1)
-  //neki kod
+  else if(stanjeIgre == 1)
+  {
+    if (raceGameOver == true) //nastupio je Game Over za igru Race
+    {
+      //ukoliko je klinuto na gumb za restart, ponovo pokreni igru
+      if (pow(mouseX-width/4, 2)+pow(mouseY-0.8*height, 2) <= pow(restartGumb.width/2, 2))
+      {
+        raceGameOver = false;
+        imeIgraca = ""; //očisti ime igrača
+        raceSetup();
+      }
+      //ukoliko je kliknuto na gumb za exit, odi na izbornik levela
+      else if (pow(mouseX-3*width/4, 2)+pow(mouseY-0.8*height, 2) <= pow(exitGumb.width/2, 2))
+      {
+        pomakIzbornika = height;
+        imeIgraca = ""; //očisti ime igrača
+        stanjeIgre= 0; //Idemo u izbornik. Koji:
+        stanjeIzbornika = 1; //pa izbornik za biranje levela!
+
+        //zaustavi glazbu igre i pokreni onu od izbornika
+        player.close();
+        player = minim.loadFile("TimmyTrumpetMantra.mp3");
+        //player.play();
+        player.loop(); //želimo da se glazba ponavlja
+      }
+      //ukoliko je kliknuto na gumb za save, spremi rezultat
+      else if (pow(mouseX-width/2, 2)+pow(mouseY-0.8*height, 2) <= pow(saveGumb.width/2, 2) && brojBodova>0)
+      {
+        spremiRezultat(imeIgraca, brojBodova, stanjeIgre);
+        if (imeIgraca.equals("") == false) {
+          imeIgraca = "";
+          brojBodova = 0;
+          ucitajTopListu();
+        }
+      }
+    }
+  }
   //nedostaje if ako sam u igri 2
   //else if(stanjeIgre == 2)
   //neki kod

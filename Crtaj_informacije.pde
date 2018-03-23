@@ -1,16 +1,112 @@
+int brojIgreZaPrikaz; // 0-2
+String[] imenaIgara=new String[3];
+String[] opisiIgara=new String[3];
+PImage[] slikeIgara=new PImage[3];
+String[] imenaAutora=new String[3];
+PImage strelicaDesno, strelicaLijevo;
+PImage strelicaDesnoFilter, strelicaLijevoFilter;
+
 void crtajInformacije()
 {
-  //pozadine zakomentirane zbog performansi
-  //background(0);
-  //image(pozadina, width/2, height/2/*, width, height*/);
-  textSize(width/40);
+  textFont(createFont("MONO.ttf",32));
+  textSize(width/50);
+  textAlign(LEFT,TOP);
   fill(0,0,255); //plavo
-  text("Neke info, ispod gumb za povratak.",width/2,height/3);
+  text("Igra "+(brojIgreZaPrikaz+1)+". :"+imenaIgara[brojIgreZaPrikaz],width/20,height/10);
   
+  //textAlign(RIGHT,TOP);
+  text("AUTOR: "+imenaAutora[brojIgreZaPrikaz],width/2,height/10);
+  
+  //ScreenShot:
+  image(slikeIgara[brojIgreZaPrikaz],width/4, height/2);
+  
+ 
+  int sirinaBoxa=width/3;
+  int visinaBoxa=height/2;
+  int polozajBoxaX=3*width/4;
+  int polozajBoxaY=height/2;
+  //Upute:
+  rectMode(CENTER);
+  fill(0, 0, 153);
+  rect(polozajBoxaX, polozajBoxaY, sirinaBoxa,visinaBoxa);
+  fill(255);
+  text(opisiIgara[0], polozajBoxaX, polozajBoxaY, sirinaBoxa*8/9, visinaBoxa*8/9);
+  
+  
+  //Strelice
+  //rectMode(CENTER);
+  if((pow(mouseX-21*width/24, 2)+pow(mouseY-6*height/7, 2)) < pow(height/12,2))
+    image(strelicaDesno,21*width/24, 6*height/7);
+  else
+    image(strelicaDesnoFilter,21*width/24, 6*height/7);
+
+  if((pow(mouseX-width/8, 2)+pow(mouseY-6*height/7, 2)) < pow(height/12,2))
+    image(strelicaLijevo,width/8, 6*height/7);
+  else
+    image(strelicaLijevoFilter,width/8, 6*height/7);
+
+  
+  
+  
+  
+  
+  //gumb za povratak
+  textFont(izbornikNaslovFont);
+  textSize(width/40);
+  textAlign(CENTER);
   //gumb za povratak
   rectMode(CENTER);
   fill(255,0,0); //crvena boja);
   rect(width/2, 6*height/7, width/2, height/6);
   fill(0);
   text("Klikni za povratak.", width/2, 6*height/7);
+}
+
+
+void ucitajInfoMeni(){
+  for(int i=0;i<3;i++){
+    slikeIgara[i] = loadImage("background.png");    
+    slikeIgara[i].resize(width/2, height/10); 
+  }
+  brojIgreZaPrikaz=0;
+
+}
+
+void ucitajPodatkeZaInfoMenu(){
+
+  brojIgreZaPrikaz=0;
+  imenaAutora[0]="Maja Marija Barukcic";
+  imenaAutora[1]="Ivan Ceh";
+  imenaAutora[2]="Sebastijan Horvat";
+  
+  imenaIgara[0]="Star Hunter";
+  imenaIgara[1]="SpaceMen";
+  imenaIgara[2]="SpaceWars";
+  
+   opisiIgara[0]="Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. ";
+   opisiIgara[1]="Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. ";
+   opisiIgara[2]="Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. ";
+
+   for(int i=0;i<3;i++)
+   {
+     slikeIgara[i]=loadImage("Game3.png");  
+     slikeIgara[i].resize(width/3, height/2);
+   }
+
+
+   
+      
+   strelicaDesno=loadImage("desno.png");
+   strelicaDesno.resize(height/6,height/6);
+   strelicaLijevo=loadImage("lijevo.png");
+   strelicaLijevo.resize(height/6,height/6);
+   
+   strelicaDesnoFilter=loadImage("desno.png");
+   strelicaDesnoFilter.resize(height/6,height/6);
+   strelicaDesnoFilter.filter(GRAY);
+   strelicaLijevoFilter=loadImage("lijevo.png");
+   strelicaLijevoFilter.resize(height/6,height/6);
+   strelicaLijevoFilter.filter(GRAY);
+ 
+   
 }
