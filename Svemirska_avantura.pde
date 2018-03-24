@@ -297,3 +297,9 @@ void mousePressed()
     }
   }
 }
+
+void keyPressed()
+{
+  PacmanKeyPressed();
+  GameOverKeyPressed();
+}

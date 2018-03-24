@@ -111,7 +111,7 @@ boolean uDopustenimZnakovima(char znak) {
   return false;
 }
 
-void keyPressed() {
+void GameOverKeyPressed() {
   if (uDopustenimZnakovima(key) && imeIgraca.length() < maxBrojSlovaImena) {
     imeIgraca += key;
   } else if (key == BACKSPACE && imeIgraca.length() > 0) {

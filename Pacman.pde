@@ -11,6 +11,7 @@ final int pacmanDesno = 0, pacmanGore = 1, pacmanLijevo = 2, pacmanDolje = 3;
 final int[][] pacmanVektorSmjera = {{1,0}, {0,-1}, {-1,0}, {0,1}};
 
 // likovi
+Pacman pacman;
 PacmanLik[] pacmanLikovi;
 
 // definiranje polja: 0 za tocke, 1 za zid, 2 za prazna polja
@@ -52,7 +53,8 @@ void pacmanSetup()
         pacmanStanjaPolja[i][j] = pacmanTOCKA;
     }
   
-  pacmanLikovi = new PacmanLik[]{new Pacman(new int[]{20,7}, pacmanDesno, pacmanDesno)};
+  pacman = new Pacman(new int[]{20,7}, pacmanDesno, pacmanDesno);
+  pacmanLikovi = new PacmanLik[]{pacman};
 }
 
 void pacman() {}
@@ -106,4 +108,20 @@ boolean PacmanSljedecePoljeJeZid(int[] trenutno_polje, int smjer)
 {
   int sljedece_polje[] = PacmanSljedecePolje(trenutno_polje, smjer);
   return pacmanStanjaPolja[sljedece_polje[1]][sljedece_polje[0]] == pacmanZID;
+}
+
+void PacmanKeyPressed()
+{
+  if (stanjeIgre == 2 && key == CODED)
+  {
+    print("*");
+    if (keyCode == UP)
+      pacman.sljedeciSmjer = pacmanGore;
+    else if (keyCode == DOWN)
+      pacman.sljedeciSmjer = pacmanDolje;
+    else if (keyCode == LEFT)
+      pacman.sljedeciSmjer = pacmanLijevo;
+    else if (keyCode == RIGHT)
+      pacman.sljedeciSmjer = pacmanDesno;
+  }
 }
