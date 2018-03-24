@@ -3,16 +3,36 @@ abstract public class PacmanLik
   protected int[] trenutnoPolje; // = {20,7};
   protected int trenutniSmjer, tockaIzmedu;
   
-  public PacmanLik(int[] pocetnoPolje, int pocetniSmjer)
+  // odredivanje brzine kretanja pacmana - koliko intervala treba proci da bi se pomakli za jedno polje
+  protected final int brojPomakaZaJednoPolje;
+  
+  public PacmanLik(int[] pocetnoPolje, int pocetniSmjer, int brojPomakaZaJednoPolje)
   {
     trenutnoPolje = pocetnoPolje;
     trenutniSmjer = pocetniSmjer;
     tockaIzmedu = 0;
+    this.brojPomakaZaJednoPolje = brojPomakaZaJednoPolje;
   }
   
   abstract public void Pomakni();
   
-  abstract public void Nacrtaj(float sirinaPolja, float visinaPolja);
+  public void Nacrtaj(float sirinaPolja, float visinaPolja)
+  {
+    float x = sirinaPolja*(trenutnoPolje[0]+0.5+tockaIzmedu/(float)brojPomakaZaJednoPolje*pacmanVektorSmjera[trenutniSmjer][0]),
+          y = visinaPolja*(trenutnoPolje[1]+0.5+tockaIzmedu/(float)brojPomakaZaJednoPolje*pacmanVektorSmjera[trenutniSmjer][1]);
+    
+    NacrtajNaPoziciji(new float[]{x,y}, sirinaPolja, visinaPolja);
+    
+    // prelazak s lijeve na desnu stranu ekrana
+    if (trenutnoPolje[0] == 0 && trenutniSmjer == pacmanLijevo)
+      NacrtajNaPoziciji(new float[]{x + pacmanPoljaVodoravno * sirinaPolja, y}, sirinaPolja, visinaPolja);
+    
+    // prelazak s desne na lijevu stranu ekrana
+    if (trenutnoPolje[0] == pacmanPoljaVodoravno - 1 && trenutniSmjer == pacmanDesno)
+      NacrtajNaPoziciji(new float[]{x - pacmanPoljaVodoravno * sirinaPolja, y}, sirinaPolja, visinaPolja);
+  }
+  
+  abstract public void NacrtajNaPoziciji(float[] pozicija, float sirinaPolja, float visinaPolja);
 }
 
 public class Pacman extends PacmanLik
@@ -21,30 +41,25 @@ public class Pacman extends PacmanLik
   
   public Pacman(int[] pocetnoPolje, int pocetniSmjer, int sljedeciSmjer)
   {
-    super(pocetnoPolje, pocetniSmjer);
+    super(pocetnoPolje, pocetniSmjer, 10);
     this.sljedeciSmjer = sljedeciSmjer;
   }
   
   public void Pomakni()
   {
-    if (++tockaIzmedu == pacmanBrojPomakaZaJednoPolje)
+    if (++tockaIzmedu == brojPomakaZaJednoPolje)
     {
       trenutnoPolje = PacmanSljedecePolje(trenutnoPolje, trenutniSmjer);
       tockaIzmedu = 0;
-    
-      println(trenutnoPolje);
     }
   }
   
-  public void Nacrtaj(float sirinaPolja, float visinaPolja)
+  public void NacrtajNaPoziciji(float[] pozicija, float sirinaPolja, float visinaPolja)
   {
     fill(255,255,0); // zuta
     stroke(255,255,0);
-  
-    // crtanje pacmana
-    ellipse(sirinaPolja*(trenutnoPolje[0]+0.5+tockaIzmedu/(float)pacmanBrojPomakaZaJednoPolje*pacmanVektorSmjera[trenutniSmjer][0]),
-            visinaPolja*(trenutnoPolje[1]+0.5+tockaIzmedu/(float)pacmanBrojPomakaZaJednoPolje*pacmanVektorSmjera[trenutniSmjer][1]),
-            sirinaPolja*0.8, visinaPolja*0.8);
+
+    ellipse(pozicija[0], pozicija[1], sirinaPolja*0.8, visinaPolja*0.8);
   }
 }
 
@@ -52,7 +67,7 @@ abstract public class PacmanProtivnik extends PacmanLik
 {
   public PacmanProtivnik(int[] pocetnoPolje, int pocetniSmjer)
   {
-    super(pocetnoPolje, pocetniSmjer);
+    super(pocetnoPolje, pocetniSmjer, 11);
   }
 }
 
@@ -68,9 +83,9 @@ public class PacmanPametniProtivnik extends PacmanProtivnik
     
   }
   
-  public void Nacrtaj(float sirinaPolja, float visinaPolja)
+  public void NacrtajNaPoziciji(float[] pozicija, float sirinaPolja, float visinaPolja)
   {
-    
+  
   }
 }
 
@@ -86,7 +101,7 @@ public class PacmanGlupiProtivnik extends PacmanProtivnik
     
   }
   
-  public void Nacrtaj(float sirinaPolja, float visinaPolja)
+  public void NacrtajNaPoziciji(float[] pozicija, float sirinaPolja, float visinaPolja)
   {
     
   }

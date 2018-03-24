@@ -10,9 +10,6 @@ final int pacmanDesno = 0, pacmanGore = 1, pacmanLijevo = 2, pacmanDolje = 3;
 // vektori smjerova
 final int[][] pacmanVektorSmjera = {{1,0}, {0,-1}, {-1,0}, {0,1}};
 
-// odredivanje brzine kretanja pacmana
-final int pacmanBrojPomakaZaJednoPolje = 10;
-
 // likovi
 PacmanLik[] pacmanLikovi;
 
