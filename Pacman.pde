@@ -13,9 +13,8 @@ final int[][] pacmanVektorSmjera = {{1,0}, {0,-1}, {-1,0}, {0,1}};
 // odredivanje brzine kretanja pacmana
 final int pacmanBrojPomakaZaJednoPolje = 10;
 
-// globalne varijable stanja
-int[] pacmanTrenutnoPolje = {20,7};
-int pacmanTrenutniSmjer = 0, pacmanSlijedeciSmjer, pacmanTockaIzmedu=0;
+// likovi
+PacmanLik[] pacmanLikovi;
 
 // definiranje polja: 0 za tocke, 1 za zid, 2 za prazna polja
 int[][] pacmanStanjaPolja =
@@ -54,12 +53,11 @@ void pacmanSetup()
       if (pacmanStanjaPolja[i][j] != pacmanZID)
         pacmanStanjaPolja[i][j] = pacmanTOCKA;
     }
+  
+  pacmanLikovi = new PacmanLik[]{new Pacman(new int[]{20,7}, pacmanDesno, pacmanDesno)};
 }
 
-void pacman()
-{
-  
-}
+void pacman() {}
 
 void crtajPacmana()
 {
@@ -80,23 +78,14 @@ void crtajPacmana()
       else if (pacmanStanjaPolja[i][j] == pacmanTOCKA)
         ellipse(pacmanSirinaPolja*(j+0.5), pacmanVisinaPolja*(i+0.5), pacmanSirinaPolja/8., pacmanVisinaPolja/8.);
     }
-  
-  fill(255,255,0); // zuta
-  stroke(255,255,0);
-  
-  // crtanje pacmana
-  ellipse(pacmanSirinaPolja*(pacmanTrenutnoPolje[0]+0.5+pacmanTockaIzmedu/(float)pacmanBrojPomakaZaJednoPolje*pacmanVektorSmjera[pacmanTrenutniSmjer][0]),
-          pacmanVisinaPolja*(pacmanTrenutnoPolje[1]+0.5+pacmanTockaIzmedu/(float)pacmanBrojPomakaZaJednoPolje*pacmanVektorSmjera[pacmanTrenutniSmjer][1]),
-          pacmanSirinaPolja*0.8, pacmanVisinaPolja*0.8);
-  
-  if (++pacmanTockaIzmedu == pacmanBrojPomakaZaJednoPolje)
-  {
-    pacmanTrenutnoPolje = PacmanSljedecePolje(pacmanTrenutnoPolje, pacmanTrenutniSmjer);
-    pacmanTockaIzmedu = 0;
     
-    println(pacmanTrenutnoPolje);
+  for (PacmanLik lik : pacmanLikovi)
+  {
+    lik.Pomakni();
+    lik.Nacrtaj(pacmanSirinaPolja, pacmanVisinaPolja);
   }
   
+  // brisanje desnog dijela koji izlazi iz polja
   fill(0); // crna
   stroke(0);
   rectMode(CORNER);
