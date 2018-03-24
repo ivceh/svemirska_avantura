@@ -43,6 +43,7 @@ final int pacmanPoljaOkomito = pacmanStanjaPolja.length,
 void pacmanSetup()
 {
   rectMode(CENTER);
+  strokeWeight(1);
   
   for (int i=0; i<pacmanPoljaOkomito; ++i)
     for (int j=0; j<pacmanPoljaVodoravno; ++j)
@@ -104,5 +105,5 @@ int[] PacmanSljedecePolje(int[] trenutno_polje, int smjer)
 boolean PacmanSljedecePoljeJeZid(int[] trenutno_polje, int smjer)
 {
   int sljedece_polje[] = PacmanSljedecePolje(trenutno_polje, smjer);
-  return pacmanStanjaPolja[sljedece_polje[0]][sljedece_polje[1]] == pacmanZID;
+  return pacmanStanjaPolja[sljedece_polje[1]][sljedece_polje[0]] == pacmanZID;
 }

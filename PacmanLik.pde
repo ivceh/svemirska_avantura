@@ -47,10 +47,25 @@ public class Pacman extends PacmanLik
   
   public void Pomakni()
   {
-    if (++tockaIzmedu == brojPomakaZaJednoPolje)
+    if (tockaIzmedu > 0)
+      if (++tockaIzmedu == brojPomakaZaJednoPolje)
+      {
+        trenutnoPolje = PacmanSljedecePolje(trenutnoPolje, trenutniSmjer);
+        tockaIzmedu = 0;
+      }
+    
+    if (tockaIzmedu == 0)
     {
-      trenutnoPolje = PacmanSljedecePolje(trenutnoPolje, trenutniSmjer);
-      tockaIzmedu = 0;
+      if (PacmanSljedecePoljeJeZid(trenutnoPolje, sljedeciSmjer))
+      {
+        if (!PacmanSljedecePoljeJeZid(trenutnoPolje, trenutniSmjer))
+          tockaIzmedu = 1;
+      }
+      else
+      {
+        trenutniSmjer = sljedeciSmjer;
+        tockaIzmedu = 1;
+      }
     }
   }
   
