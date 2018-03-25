@@ -1,7 +1,6 @@
 import java.util.Arrays;
 
-// globalne konstante
-// stanja polja
+// globalne konstante za stanja polja
 final int pacmanTOCKA = 0, pacmanZID = 1, pacmanPRAZNO = 2;
 
 // smjerovi
@@ -40,24 +39,33 @@ int[][] pacmanStanjaPolja =
 // racunanje velicine polje
 final int pacmanPoljaOkomito = pacmanStanjaPolja.length,
           pacmanPoljaVodoravno = pacmanStanjaPolja[0].length;
+          
+// broj preostalih tockica
+int pacmanBrojTockica;
 
 void pacmanSetup()
 {
   rectMode(CENTER);
   strokeWeight(1);
+}
+
+void pacman()
+{
+  pacmanBrojTockica = 0;
   
   for (int i=0; i<pacmanPoljaOkomito; ++i)
     for (int j=0; j<pacmanPoljaVodoravno; ++j)
     {
       if (pacmanStanjaPolja[i][j] != pacmanZID)
+      {
         pacmanStanjaPolja[i][j] = pacmanTOCKA;
+        ++pacmanBrojTockica;
+      }
     }
   
   pacman = new Pacman(new int[]{20,7}, pacmanDesno, pacmanDesno);
   pacmanLikovi = new PacmanLik[]{pacman};
 }
-
-void pacman() {}
 
 void crtajPacmana()
 {
@@ -114,7 +122,6 @@ void PacmanKeyPressed()
 {
   if (stanjeIgre == 2 && key == CODED)
   {
-    print("*");
     if (keyCode == UP)
       pacman.sljedeciSmjer = pacmanGore;
     else if (keyCode == DOWN)

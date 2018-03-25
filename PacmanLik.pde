@@ -62,6 +62,12 @@ public class Pacman extends PacmanLik
   
   public void OdluciOSljedecemSmjeru()
   {
+    if (pacmanStanjaPolja[trenutnoPolje[1]][trenutnoPolje[0]] == pacmanTOCKA)
+    {
+      pacmanStanjaPolja[trenutnoPolje[1]][trenutnoPolje[0]] = pacmanPRAZNO;
+      --pacmanBrojTockica;
+    }
+    
     if (PacmanSljedecePoljeJeZid(trenutnoPolje, sljedeciSmjer))
     {
       if (!PacmanSljedecePoljeJeZid(trenutnoPolje, trenutniSmjer))
