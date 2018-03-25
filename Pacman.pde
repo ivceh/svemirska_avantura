@@ -13,6 +13,13 @@ final int[][] pacmanVektorSmjera = {{1,0}, {0,-1}, {-1,0}, {0,1}};
 Pacman pacman;
 PacmanLik[] pacmanLikovi;
 
+// odbrojavanje do pocetka igre
+int pacmanDoPocetkaIgre;
+
+// fontovi
+PFont pacmanFont;
+PFont pacmanFontVeliki;
+
 // definiranje polja: 0 za tocke, 1 za zid, 2 za prazna polja
 int[][] pacmanStanjaPolja =
   {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -47,6 +54,9 @@ void pacmanSetup()
 {
   rectMode(CENTER);
   strokeWeight(1);
+  
+  pacmanFont = createFont("MONO.ttf",18);
+  pacmanFontVeliki = createFont("MONO.ttf",40);
 }
 
 void pacman()
@@ -65,6 +75,8 @@ void pacman()
   
   pacman = new Pacman(new int[]{20,7}, pacmanDesno, pacmanDesno);
   pacmanLikovi = new PacmanLik[]{pacman};
+  
+  pacmanDoPocetkaIgre = 180;
 }
 
 void crtajPacmana()
@@ -86,12 +98,38 @@ void crtajPacmana()
       else if (pacmanStanjaPolja[i][j] == pacmanTOCKA)
         ellipse(pacmanSirinaPolja*(j+0.5), pacmanVisinaPolja*(i+0.5), pacmanSirinaPolja/8., pacmanVisinaPolja/8.);
     }
-    
-  for (PacmanLik lik : pacmanLikovi)
+  
+  if (pacmanDoPocetkaIgre > 0)
   {
-    lik.Pomakni();
-    lik.Nacrtaj(pacmanSirinaPolja, pacmanVisinaPolja);
+    if (pacmanDoPocetkaIgre == 180)
+    {
+      textFont(pacmanFont);
+      textAlign(LEFT, TOP);
+      fill(255);
+      text("Pritisnite strelicu \n za pocetak", width * 0.83, height * 0.1);
+    }
+    else
+    {
+      --pacmanDoPocetkaIgre;
+      textFont(pacmanFontVeliki);
+      textAlign(LEFT, TOP);
+      fill(255);
+      text(pacmanDoPocetkaIgre / 60 + 1, width * 0.89, height * 0.1);
+    }
   }
+  else
+  {
+    for (PacmanLik lik : pacmanLikovi)
+      lik.Pomakni();
+    textFont(pacmanFont);
+    textAlign(LEFT, TOP);
+    fill(255);
+    text("Preostalo tockica: " + pacmanBrojTockica, width * 0.83, height * 0.1);
+  }
+  
+  // crtanje likova
+  for (PacmanLik lik : pacmanLikovi)
+    lik.Nacrtaj(pacmanSirinaPolja, pacmanVisinaPolja);
   
   // brisanje desnog dijela koji izlazi iz polja
   fill(0); // crna
@@ -122,13 +160,19 @@ void PacmanKeyPressed()
 {
   if (stanjeIgre == 2 && key == CODED)
   {
-    if (keyCode == UP)
-      pacman.sljedeciSmjer = pacmanGore;
-    else if (keyCode == DOWN)
-      pacman.sljedeciSmjer = pacmanDolje;
-    else if (keyCode == LEFT)
-      pacman.sljedeciSmjer = pacmanLijevo;
-    else if (keyCode == RIGHT)
-      pacman.sljedeciSmjer = pacmanDesno;
+    if (keyCode == UP || keyCode == DOWN || keyCode == LEFT || keyCode == RIGHT)
+    {
+      if (keyCode == UP)
+        pacman.sljedeciSmjer = pacmanGore;
+      else if (keyCode == DOWN)
+        pacman.sljedeciSmjer = pacmanDolje;
+      else if (keyCode == LEFT)
+        pacman.sljedeciSmjer = pacmanLijevo;
+      else // (keyCode == RIGHT)
+        pacman.sljedeciSmjer = pacmanDesno;
+      
+      if (pacmanDoPocetkaIgre == 180)
+        --pacmanDoPocetkaIgre;
+    }
   }
 }
