@@ -14,7 +14,22 @@ abstract public class PacmanLik
     this.brojPomakaZaJednoPolje = brojPomakaZaJednoPolje;
   }
   
-  abstract public void Pomakni();
+  public void Pomakni()
+  {
+    if (tockaIzmedu == brojPomakaZaJednoPolje)
+    {
+      trenutnoPolje = PacmanSljedecePolje(trenutnoPolje, trenutniSmjer);
+      tockaIzmedu = 0;
+    }
+    
+    if (tockaIzmedu == 0)
+      OdluciOSljedecemSmjeru();
+    else
+      ++tockaIzmedu;
+  }
+  
+  // po potrebi mijenja trenutniSmjer, ako lik nije stao treba postaviti tockaIzmedu = 1
+  abstract public void OdluciOSljedecemSmjeru();
   
   public void Nacrtaj(float sirinaPolja, float visinaPolja)
   {
@@ -45,27 +60,17 @@ public class Pacman extends PacmanLik
     this.sljedeciSmjer = sljedeciSmjer;
   }
   
-  public void Pomakni()
+  public void OdluciOSljedecemSmjeru()
   {
-    if (tockaIzmedu > 0)
-      if (++tockaIzmedu == brojPomakaZaJednoPolje)
-      {
-        trenutnoPolje = PacmanSljedecePolje(trenutnoPolje, trenutniSmjer);
-        tockaIzmedu = 0;
-      }
-    
-    if (tockaIzmedu == 0)
+    if (PacmanSljedecePoljeJeZid(trenutnoPolje, sljedeciSmjer))
     {
-      if (PacmanSljedecePoljeJeZid(trenutnoPolje, sljedeciSmjer))
-      {
-        if (!PacmanSljedecePoljeJeZid(trenutnoPolje, trenutniSmjer))
-          tockaIzmedu = 1;
-      }
-      else
-      {
-        trenutniSmjer = sljedeciSmjer;
+      if (!PacmanSljedecePoljeJeZid(trenutnoPolje, trenutniSmjer))
         tockaIzmedu = 1;
-      }
+    }
+    else
+    {
+      trenutniSmjer = sljedeciSmjer;
+      tockaIzmedu = 1;
     }
   }
   
@@ -93,7 +98,7 @@ public class PacmanPametniProtivnik extends PacmanProtivnik
     super(pocetnoPolje, pocetniSmjer);
   }
   
-  public void Pomakni()
+  public void OdluciOSljedecemSmjeru()
   {
     
   }
@@ -111,7 +116,7 @@ public class PacmanGlupiProtivnik extends PacmanProtivnik
     super(pocetnoPolje, pocetniSmjer);
   }
   
-  public void Pomakni()
+  public void OdluciOSljedecemSmjeru()
   {
     
   }
