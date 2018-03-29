@@ -34,6 +34,13 @@ float easingPomakaIzbornika = 0.15;
 
 void draw()
 {
+  if (glazbaUkljucena == false) {
+    try { 
+      player.close();
+    }
+    catch(Exception e) {
+    };
+  }
   background(0);
   //println(frameRate);
   if (stanjeIgre == -1) //crta se uvodna animacija
@@ -200,26 +207,25 @@ void mousePressed()
         pomakIzbornika = height;
         stanjeIzbornika = 0;
       }
-      
-      if(true)//u meniju informacije smo 
+
+      if (true)//u meniju informacije smo 
       { //reakcija na gumb za povratak je ista za info i opcije 
         //reakcija na strelice
         //ako klikne na desnu strelicu
-        if((pow(mouseX-21*width/24, 2)+pow(mouseY-6*height/7, 2)) < pow(height/12,2))
+        if ((pow(mouseX-21*width/24, 2)+pow(mouseY-6*height/7, 2)) < pow(height/12, 2))
         {
           brojIgreZaPrikaz=(brojIgreZaPrikaz+1)%3;
         }
         //ako klikne na lijevu strelicu
-        else if((pow(mouseX-width/8, 2)+pow(mouseY-6*height/7, 2)) < pow(height/12,2))
+        else if ((pow(mouseX-width/8, 2)+pow(mouseY-6*height/7, 2)) < pow(height/12, 2))
         {
           brojIgreZaPrikaz=(brojIgreZaPrikaz+2)%3; //+2= +3 -1 = -1 mod 3 ___ da izbjegnem modulo s negativnim brojevima
         }
       }
-      
     }
   }
   //nedostaje if ako sam u igri 1
-  else if(stanjeIgre == 1)
+  else if (stanjeIgre == 1)
   {
     if (raceGameOver == true) //nastupio je Game Over za igru Race
     {
@@ -292,6 +298,25 @@ void mousePressed()
           imeIgraca = "";
           brojBodova = 0;
           ucitajTopListu();
+        }
+      }
+    }
+  }
+}
+
+void mouseClicked() {
+  if (stanjeIgre == 0 && stanjeIzbornika == 3) {
+    //kliknuto na gumb za uključi/isključi glazbu
+    if (mouseX >= width/24 && mouseX <= 23*width/24) {
+      if (mouseY >= height/6 && mouseY <= height/3) {
+        glazbaUkljucena = !glazbaUkljucena;
+        if (glazbaUkljucena == true) {
+          try {
+            player = minim.loadFile("TimmyTrumpetMantra.mp3");
+            player.loop();
+          } 
+          catch(Exception e) {
+          }
         }
       }
     }
