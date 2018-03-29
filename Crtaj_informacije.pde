@@ -17,13 +17,16 @@ void crtajInformacije()
   //textAlign(RIGHT,TOP);
   text("AUTOR: "+imenaAutora[brojIgreZaPrikaz],width/2,height/10);
   
-  //ScreenShot:
-  image(slikeIgara[brojIgreZaPrikaz],width/4, height/2);
+  int razmakIzmeduBoxova=width/48;
   
- 
+  //ScreenShot:
+  rectMode(CENTER);
+  image(slikeIgara[brojIgreZaPrikaz],razmakIzmeduBoxova + width/6 , height/2);
+  
+  //box s opisom igre
   int sirinaBoxa=width/3;
   int visinaBoxa=height/2;
-  int polozajBoxaX=3*width/4;
+  int polozajBoxaX=2*razmakIzmeduBoxova+ width/3 + width/6;
   int polozajBoxaY=height/2;
   //Upute:
   rectMode(CENTER);
@@ -32,6 +35,26 @@ void crtajInformacije()
   fill(255);
   text(opisiIgara[0], polozajBoxaX, polozajBoxaY, sirinaBoxa*8/9, visinaBoxa*8/9);
   
+  
+  //box za highscore
+  rectMode(CENTER);
+  fill(0, 0, 153);
+  rect(3*razmakIzmeduBoxova+ 2*width/3+width/4/2, polozajBoxaY, width/4,visinaBoxa);
+  fill(255);
+  text("Highscore:", 3*razmakIzmeduBoxova+ 2*width/3+width/4/2, polozajBoxaY, (width/4)*8/9, visinaBoxa*8/9);
+  textSize(width/50);
+  for(int i=0;i<10;i++){
+    textAlign(LEFT);
+    fill(255);
+    text((i+1)+"."+dohvatiImeIgraca(i+1,brojIgreZaPrikaz+1),3*razmakIzmeduBoxova+ 2*width/3+width/4/2, polozajBoxaY+(i+2)*width/50,(width/4)*8/9,visinaBoxa*8/9);
+    textAlign(RIGHT);
+    fill(204, 51, 0);
+    text(str(dohvatiBrojBodova(i+1,brojIgreZaPrikaz+1)),3*razmakIzmeduBoxova+ 2*width/3+width/4/2, polozajBoxaY+(i+2)*width/50,(width/4)*8/9,visinaBoxa*8/9);
+
+  }
+  
+  
+ 
   
   //Strelice
   //rectMode(CENTER);
