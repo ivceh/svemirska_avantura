@@ -94,13 +94,13 @@ void race()
     }
     
     racePassedMillis=millis()-raceTimeBomb;
-    if(racePassedMillis>2500){  //svakih 2.5 secunde dodaj novi bomb---------------------------TODO: ovo prilagoditi kolicinu
+    if(racePassedMillis>1500){  //svakih 1.5 secunde dodaj novi bomb---------------------------TODO: ovo prilagoditi kolicinu
        raceTimeBomb=millis();
        raceNoviBomb();
     }
     
     racePassedMillis=millis()-raceTimePozadina;
-    if(racePassedMillis>2000){  //svakih 2 secunde se malo ubrza---------------------------TODO: ovo prilagoditi akceleraciju
+    if(racePassedMillis>1000){  //svakih 1 secund1 se malo ubrza---------------------------TODO: ovo prilagoditi akceleraciju
        raceTimePozadina=millis();
        raceUbrzanjePozadine++;
     }
