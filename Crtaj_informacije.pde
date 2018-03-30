@@ -5,9 +5,14 @@ PImage[] slikeIgara=new PImage[3];
 String[] imenaAutora=new String[3];
 PImage strelicaDesno, strelicaLijevo;
 PImage strelicaDesnoFilter, strelicaLijevoFilter;
+boolean refreshHighScore=true;      //popis Highscoreova refreshamo samo pri uctavanju menija...varijabla se postavi na false nakon dohvacanja , a vraca na true kod izlaza iz menija.
 
 void crtajInformacije()
 {
+  if(refreshHighScore){
+    dohvatiHighscores();
+    refreshHighScore=false;
+  }
   textFont(createFont("MONO.ttf",32));
   textSize(width/50);
   textAlign(LEFT,TOP);
@@ -46,10 +51,10 @@ void crtajInformacije()
   for(int i=0;i<10;i++){
     textAlign(LEFT);
     fill(255);
-    text((i+1)+"."+dohvatiImeIgraca(i+1,brojIgreZaPrikaz+1),3*razmakIzmeduBoxova+ 2*width/3+width/4/2, polozajBoxaY+(i+2)*width/50,(width/4)*8/9,visinaBoxa*8/9);
+    text(TopPlayers[brojIgreZaPrikaz*10+i],3*razmakIzmeduBoxova+ 2*width/3+width/4/2, polozajBoxaY+(i+2)*width/50,(width/4)*8/9,visinaBoxa*8/9);
     textAlign(RIGHT);
     fill(204, 51, 0);
-    text(str(dohvatiBrojBodova(i+1,brojIgreZaPrikaz+1)),3*razmakIzmeduBoxova+ 2*width/3+width/4/2, polozajBoxaY+(i+2)*width/50,(width/4)*8/9,visinaBoxa*8/9);
+    text(str(HighScores[brojIgreZaPrikaz*10+i]),3*razmakIzmeduBoxova+ 2*width/3+width/4/2, polozajBoxaY+(i+2)*width/50,(width/4)*8/9,visinaBoxa*8/9);
 
   }
   
@@ -132,4 +137,20 @@ void ucitajPodatkeZaInfoMenu(){
    strelicaLijevoFilter.filter(GRAY);
  
    
+}
+
+
+String[] TopPlayers=new String[30];
+Integer[] HighScores=new Integer[30];
+
+void dohvatiHighscores(){
+  //i=ID igre
+  //j=redni broj TOPigraca
+  
+  for(int i=0;i<3;i++){
+    for(int j=0;j<10;j++){
+      TopPlayers[10*i+j]=str(j+1)+"."+dohvatiImeIgraca(j+1,i+1);
+      HighScores[10*i+j]=dohvatiBrojBodova(j+1,i+1);
+    }
+  }
 }

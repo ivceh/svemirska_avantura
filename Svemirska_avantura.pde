@@ -194,15 +194,16 @@ void mousePressed()
       }
     } else if (stanjeIzbornika == 2 || stanjeIzbornika == 3) //u informacijama, opcijama ili mapi
     {
-      //kliknut je gumb za povratak na glavni izbornik
-      if (mouseX > width/4 && mouseX < 3*width/4 && mouseY < 6*height/7+height/12 && mouseY > 6*height/7-height/12)
-      {
-        pomakIzbornika = height;
-        stanjeIzbornika = 0;
-      }
-      
-      if(true)//u meniju informacije smo 
+      if(stanjeIzbornika == 2 )//u meniju informacije smo 
       { //reakcija na gumb za povratak je ista za info i opcije 
+        if (mouseX > width/4 && mouseX < 3*width/4 && mouseY < 6*height/7+height/12 && mouseY > 6*height/7-height/12)
+        {
+          pomakIzbornika = height;
+          stanjeIzbornika = 0;
+          refreshHighScore=true; //pri sljedecem crtanju InfoMenija refreshaj HighScores      
+          brojIgreZaPrikaz=0;//pri sljedecem crtanju opet pocni od igre#1
+        }
+      
         //reakcija na strelice
         //ako klikne na desnu strelicu
         if((pow(mouseX-21*width/24, 2)+pow(mouseY-6*height/7, 2)) < pow(height/12,2))
@@ -215,6 +216,17 @@ void mousePressed()
           brojIgreZaPrikaz=(brojIgreZaPrikaz+2)%3; //+2= +3 -1 = -1 mod 3 ___ da izbjegnem modulo s negativnim brojevima
         }
       }
+      
+      
+      //kliknut je gumb za povratak na glavni izbornik
+      if (mouseX > width/4 && mouseX < 3*width/4 && mouseY < 6*height/7+height/12 && mouseY > 6*height/7-height/12)
+      {
+        pomakIzbornika = height;
+        stanjeIzbornika = 0;
+        
+      }
+      
+
       
     }
   }
