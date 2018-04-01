@@ -21,8 +21,10 @@ void raceKolizijaBoma(){
             raceBrojZivota--;
           }
         if(raceBrojZivota<=0)
-        {//cim se spusti ma nula sredi da bude Gameover
+        {//cim se spusti na nula sredi da bude Gameover
           raceGameOver=true;
+          //očistim ime igrača (jer se u igri možda pritisnulo 'h' za help)
+          imeIgraca = "";
           cursor();
         };     
      }

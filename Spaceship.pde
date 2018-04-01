@@ -152,6 +152,8 @@ void spaceshipIspisiRezultat()
   if (brZivota<=0)
   {
     spaceshipGameOver = true;
+    //prije ispisa GameOvera očistit ime igrača (jer je možda bilo h-ova za help)
+    imeIgraca = "";
     spaceshipDodajEksploziju(polozajX, polozajY);
     cursor(); //pokaži pokazivač miša da bi korisnik mogao kliknuti neki gumb
   }

@@ -1,6 +1,9 @@
 PImage pozadina, 
   mars, venera, neptun, pluton;
 
+Boolean crtanjeHelpa = false;
+PImage[] slikeHelpova = new PImage[3];
+
 void setup()
 {
   fullScreen();
@@ -22,7 +25,7 @@ void setup()
 int stanjeIgre = 0, stanjeIzbornika = 0;
 //stanjeIgre ==  0 akko smo u nekom izborniku
 //           == -1 akko smo u uvodnoj animaciji
-//stanjeIgre > 0 ako smo u igre, nekom levelu, npr. 1 znači u 1. levelu
+//stanjeIgre > 0 ako smo u igri, nekom levelu, npr. 1 znači u 1. levelu
 //stanjeIzbornika == 0 akko smo u glavnom izborniku
 //    == 1 akko smo na mapi za biranje levela
 //    == 2 akko smo u izborniku za postavljanje opcija
@@ -41,6 +44,13 @@ void draw()
     catch(Exception e) {
     };
   }
+
+  //ako smo u igi i pritisnut je h za help
+  if (stanjeIgre > 0 && crtanjeHelpa == true) {
+    image(slikeHelpova[stanjeIgre-1], width/2, height/2);
+    return;
+  }
+
   background(0);
   //println(frameRate);
   if (stanjeIgre == -1) //crta se uvodna animacija
@@ -118,6 +128,12 @@ void ucitajSvePotrebneSlikeZaIzbornik()
 
   saveGumb = loadImage("saveButton.png");
   saveGumb.resize((width>height) ? height/4 : width/4, (width>height) ? height/4 : width/4);
+
+  //učitam slike helpova (koje se prikazuju pritiskom na tipku h)
+  for (int i=0; i < slikeHelpova.length; ++i) {
+    slikeHelpova[i] = loadImage("help"+(i+1)+".png");
+    slikeHelpova[i].resize(width, height);
+  }
 }
 
 void mousePressed()
@@ -201,7 +217,7 @@ void mousePressed()
       }
     } else if (stanjeIzbornika == 2 || stanjeIzbornika == 3) //u informacijama, opcijama ili mapi
     {
-      if(stanjeIzbornika == 2 )//u meniju informacije smo 
+      if (stanjeIzbornika == 2 )//u meniju informacije smo 
       { //reakcija na gumb za povratak je ista za info i opcije 
         if (mouseX > width/4 && mouseX < 3*width/4 && mouseY < 6*height/7+height/12 && mouseY > 6*height/7-height/12)
         {
@@ -210,35 +226,30 @@ void mousePressed()
           refreshHighScore=true; //pri sljedecem crtanju InfoMenija refreshaj HighScores      
           brojIgreZaPrikaz=0;//pri sljedecem crtanju opet pocni od igre#1
         }
-      
+
         //reakcija na strelice
         //ako klikne na desnu strelicu
-        if((pow(mouseX-21*width/24, 2)+pow(mouseY-6*height/7, 2)) < pow(height/12,2))
+        if ((pow(mouseX-21*width/24, 2)+pow(mouseY-6*height/7, 2)) < pow(height/12, 2))
         {
           brojIgreZaPrikaz=(brojIgreZaPrikaz+1)%3;
         }
         //ako klikne na lijevu strelicu
-        else if((pow(mouseX-width/8, 2)+pow(mouseY-6*height/7, 2)) < pow(height/12,2))
+        else if ((pow(mouseX-width/8, 2)+pow(mouseY-6*height/7, 2)) < pow(height/12, 2))
         {
           brojIgreZaPrikaz=(brojIgreZaPrikaz+2)%3; //+2= +3 -1 = -1 mod 3 ___ da izbjegnem modulo s negativnim brojevima
         }
       }
-      
-      
+
+
       //kliknut je gumb za povratak na glavni izbornik
       if (mouseX > width/4 && mouseX < 3*width/4 && mouseY < 6*height/7+height/12 && mouseY > 6*height/7-height/12)
       {
         pomakIzbornika = height;
         stanjeIzbornika = 0;
-        
       }
-      
-
-      
     }
   }
-  //nedostaje if ako sam u igri 1
-  else if(stanjeIgre == 1)
+  else if (stanjeIgre == 1)
   {
     if (raceGameOver == true) //nastupio je Game Over za igru Race
     {
@@ -340,4 +351,14 @@ void keyPressed()
 {
   PacmanKeyPressed();
   GameOverKeyPressed();
+
+  //ako je nacrtan help, isključuje se pritiskom na bilo koju tipku
+  if (crtanjeHelpa == true) {
+    crtanjeHelpa = false;
+  }
+
+  //pritiskom na tipku h se help krene crtati (u igri)
+  else if (crtanjeHelpa == false && stanjeIgre > 0 && (key == 'h' || key == 'H')) {
+    crtanjeHelpa = true;
+  }
 }
