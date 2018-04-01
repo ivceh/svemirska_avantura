@@ -104,7 +104,7 @@ void spaceship()
       noFill(); //bez ispune
       stroke(0, 0, 255); //plava crta
       strokeWeight(spaceship.width/20+1); //debljina crte
-      arc(polozajX, polozajY,
+      arc(polozajX, polozajY, 
         spaceship.width, spaceship.width, 
         radians(-90), radians(-90+spaceshipTrajanjeStita*(360/spaceshipMaxTrajanjeStita)));
       //crtam sliku štita oko broda
@@ -157,6 +157,12 @@ void spaceshipIspisiRezultat()
     spaceshipDodajEksploziju(polozajX, polozajY);
     cursor(); //pokaži pokazivač miša da bi korisnik mogao kliknuti neki gumb
   }
+
+  //ispis upute kako doći do help-a
+  textAlign(LEFT, BOTTOM);
+  textSize(width/50);
+  fill(0);
+  text("Press h for help", 5, height-5);
 }
 
 

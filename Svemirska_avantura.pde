@@ -248,8 +248,7 @@ void mousePressed()
         stanjeIzbornika = 0;
       }
     }
-  }
-  else if (stanjeIgre == 1)
+  } else if (stanjeIgre == 1)
   {
     if (raceGameOver == true) //nastupio je Game Over za igru Race
     {
@@ -357,8 +356,16 @@ void keyPressed()
     crtanjeHelpa = false;
   }
 
-  //pritiskom na tipku h se help krene crtati (u igri)
-  else if (crtanjeHelpa == false && stanjeIgre > 0 && (key == 'h' || key == 'H')) {
-    crtanjeHelpa = true;
+  //pritiskom na tipku h se help krene crtati (u igri, ali da nije Game Over)
+  else if (crtanjeHelpa == false && (key == 'h' || key == 'H')) {
+    if (stanjeIgre == 1 && raceGameOver == false) {
+      crtanjeHelpa = true;
+    } else if (stanjeIgre == 3 && spaceshipGameOver == false) {
+      crtanjeHelpa = true;
+    }
+    //nedostaje još za igru 2
+    /*else if (stanjeIgre == 2 && NEKA_VAR_ZA_GAME_OVER_U_IGRI_2 == false){
+     crtanjeHelpa = true;
+     }*/
   }
 }
