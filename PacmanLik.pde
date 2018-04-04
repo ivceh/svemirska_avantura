@@ -66,6 +66,8 @@ public class Pacman extends PacmanLik
     {
       pacmanStanjaPolja[trenutnoPolje[1]][trenutnoPolje[0]] = pacmanPRAZNO;
       --pacmanBrojTockica;
+      if (pacmanBrojTockica == 0)
+        pacmanIgraGotova = true;
     }
     
     if (PacmanSljedecePoljeJeZid(trenutnoPolje, sljedeciSmjer))

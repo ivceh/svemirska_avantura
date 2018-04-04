@@ -50,6 +50,9 @@ final int pacmanPoljaOkomito = pacmanStanjaPolja.length,
 // broj preostalih tockica
 int pacmanBrojTockica;
 
+// je li igra gotova
+boolean pacmanIgraGotova;
+
 void pacmanSetup()
 {
   rectMode(CENTER);
@@ -77,6 +80,8 @@ void pacman()
   pacmanLikovi = new PacmanLik[]{pacman};
   
   pacmanDoPocetkaIgre = 180;
+  brojBodova = 200;
+  pacmanIgraGotova = false;
 }
 
 void crtajPacmana()
@@ -117,7 +122,7 @@ void crtajPacmana()
       text(pacmanDoPocetkaIgre / 60 + 1, width * 0.89, height * 0.1);
     }
   }
-  else
+  else if (!pacmanIgraGotova)
   {
     for (PacmanLik lik : pacmanLikovi)
       lik.Pomakni();
@@ -136,6 +141,9 @@ void crtajPacmana()
   stroke(0);
   rectMode(CORNER);
   rect(pacmanSirinaPolja*pacmanPoljaVodoravno, 0, pacmanSirinaPolja, pacmanVisinaPolja*pacmanPoljaOkomito);
+  
+  if (pacmanIgraGotova)
+    crtajGameOverFormu();//Design by Sebastijan
 }
 
 int[] PacmanSljedecePolje(int[] trenutno_polje, int smjer)

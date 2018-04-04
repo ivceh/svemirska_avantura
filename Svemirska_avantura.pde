@@ -285,9 +285,44 @@ void mousePressed()
       }
     }
   }
-  //nedostaje if ako sam u igri 2
-  //else if(stanjeIgre == 2)
-  //neki kod
+  else if (stanjeIgre == 2) //znači u igri Pacman sam
+  {
+    if (pacmanIgraGotova) //nastupio je Game Over za igru Pacman
+    {
+      //ukoliko je klinuto na gumb za restart, ponovo pokreni igru
+      if (pow(mouseX-width/4, 2)+pow(mouseY-0.8*height, 2) <= pow(restartGumb.width/2, 2))
+      {
+        pacmanIgraGotova = false;
+        imeIgraca = ""; //očisti ime igrača
+        pacmanSetup();
+        pacman();
+      }
+      //ukoliko je kliknuto na gumb za exit, odi na izbornik levela
+      else if (pow(mouseX-3*width/4, 2)+pow(mouseY-0.8*height, 2) <= pow(exitGumb.width/2, 2))
+      {
+        pomakIzbornika = height;
+        imeIgraca = ""; //očisti ime igrača
+        stanjeIgre= 0; //Idemo u izbornik. Koji:
+        stanjeIzbornika = 1; //pa izbornik za biranje levela!
+
+        //zaustavi glazbu igre i pokreni onu od izbornika
+        player.close();
+        player = minim.loadFile("TimmyTrumpetMantra.mp3");
+        //player.play();
+        player.loop(); //želimo da se glazba ponavlja
+      }
+      //ukoliko je kliknuto na gumb za save, spremi rezultat
+      else if (pow(mouseX-width/2, 2)+pow(mouseY-0.8*height, 2) <= pow(saveGumb.width/2, 2) && brojBodova>0)
+      {
+        spremiRezultat(imeIgraca, brojBodova, stanjeIgre);
+        if (imeIgraca.equals("") == false) {
+          imeIgraca = "";
+          brojBodova = 0;
+          ucitajTopListu();
+        }
+      }
+    }
+  }
   else if (stanjeIgre == 3) //znači u igri Spaceship sam
   {
     if (spaceshipGameOver == true) //nastupio je Game Over za igru Spaceship
