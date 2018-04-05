@@ -1,5 +1,17 @@
 boolean glazbaUkljucena = true;
 
+PImage[] prikaziBrodova = new PImage[3];
+int indeksOznacenogBroda = 0;
+
+void ucitajSlikeOpcija() 
+{
+  for (int i=0; i<prikaziBrodova.length; ++i)
+  {
+    prikaziBrodova[i] = loadImage("spaceship"+i+".png");
+    prikaziBrodova[i].resize(int(width/4.2), height/4);
+  }
+}
+
 void crtajOpcije()
 {
   rectMode(CENTER);
@@ -20,7 +32,18 @@ void crtajOpcije()
   textSize((width/20<height/10) ? width/20 : height/10);
   fill(255); //bijeli tekst
   text(tekstGumba, width/2, height/6+height/7);
-  
+
+  //dio za odabir koja slika će se prikazati kao svemirski brod igrača
+  for (int i=0; i<prikaziBrodova.length; ++i) {
+    if(i == indeksOznacenogBroda){ //posebno istakni trenutno odabrani brod
+       fill(0,0,250); 
+    } else {
+    fill(80+i*30);
+    }
+    rect((i+1)*width/4, height/2+height/24, width/4, height/3);
+    image(prikaziBrodova[i], (i+1)*width/4, height/2+height/24);
+  }
+
   //gumb za povratak
   textSize(width/40);
   fill(20, 86, 20);

@@ -125,7 +125,7 @@ void race()
 
 
 void raceUcitajBrod(){  
-  raceShip = loadImage("spaceship.png");    
+  raceShip = loadImage("spaceship"+indeksOznacenogBroda+".png");    
   raceShip.resize(width/10, width/20);
 
   for (int i=0; i<3; ++i)

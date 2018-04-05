@@ -15,6 +15,7 @@ void setup()
 
   ucitajSvePotrebneSlikeZaIzbornik();
   mapaUcitajSlike(); //učitaj slike za mapu levela
+  ucitajSlikeOpcija(); //učitaj slike za opcije
 
   ucitajPodatkeZaInfoMenu();
 
@@ -28,8 +29,8 @@ int stanjeIgre = 0, stanjeIzbornika = 0;
 //stanjeIgre > 0 ako smo u igri, nekom levelu, npr. 1 znači u 1. levelu
 //stanjeIzbornika == 0 akko smo u glavnom izborniku
 //    == 1 akko smo na mapi za biranje levela
-//    == 2 akko smo u izborniku za postavljanje opcija
-//    == 3 akko smo u glavnom izborniku kliknuli na informacije, pa smo tamo
+//    == 2 akko smo u informacijama
+//    == 3 akko smo u izborniku za opcije
 
 float pomakIzbornika = 0;
 float easingPomakaIzbornika = 0.15;
@@ -284,8 +285,7 @@ void mousePressed()
         }
       }
     }
-  }
-  else if (stanjeIgre == 2) //znači u igri Pacman sam
+  } else if (stanjeIgre == 2) //znači u igri Pacman sam
   {
     if (pacmanIgraGotova) //nastupio je Game Over za igru Pacman
     {
@@ -322,8 +322,7 @@ void mousePressed()
         }
       }
     }
-  }
-  else if (stanjeIgre == 3) //znači u igri Spaceship sam
+  } else if (stanjeIgre == 3) //znači u igri Spaceship sam
   {
     if (spaceshipGameOver == true) //nastupio je Game Over za igru Spaceship
     {
@@ -375,6 +374,15 @@ void mouseClicked() {
           } 
           catch(Exception e) {
           }
+        }
+      }
+    }
+    //odabrana neka slika broda
+    for (int i=0; i<prikaziBrodova.length; ++i) {
+      println(mouseX, mouseY);
+      if (mouseX >= (i+1)*width/4-width/8 && mouseX <= (i+1)*width/4+width/8) {
+        if (mouseY >= height/2+height/24-height/6 && mouseY <= height/2+height/24+height/6) {
+          indeksOznacenogBroda = i; //jer je kliknuto na i-ti pravokutnik (tj. i-tu sliku)
         }
       }
     }

@@ -169,7 +169,7 @@ void spaceshipIspisiRezultat()
 
 void ucitajBrod()
 {
-  spaceship = loadImage("spaceship.png");
+  spaceship = loadImage("spaceship"+indeksOznacenogBroda+".png");
   spaceship.resize(width/10, width/20);
 
   spaceshipShield = loadImage("tenkShield.png"); //učitaj sliku štita od broda
