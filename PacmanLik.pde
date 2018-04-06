@@ -97,6 +97,46 @@ abstract public class PacmanProtivnik extends PacmanLik
   {
     super(pocetnoPolje, pocetniSmjer, 11);
   }
+  
+  public void OdluciOSljedecemSmjeru()
+  {
+    boolean[] moguciSmjerovi = new boolean[4];
+    
+    for (int i=0; i<4; ++i)
+      moguciSmjerovi[i] = !PacmanSljedecePoljeJeZid(trenutnoPolje, i);
+    
+    int brojMogucihSmjerova = 0;
+    for (int i=0; i<4; ++i)
+      if (moguciSmjerovi[i])
+        ++brojMogucihSmjerova;
+    
+    if (brojMogucihSmjerova == 1)
+    {
+      for (int i=0; i<4; ++i)
+        if (moguciSmjerovi[i])
+          trenutniSmjer = i;
+    }
+    else if (brojMogucihSmjerova == 2)
+    {
+      int suprotniSmjer = PacmanSuprotniSmjer(trenutniSmjer);
+      for (int i=0; i<4; ++i)
+        if (moguciSmjerovi[i] && i != suprotniSmjer)
+          trenutniSmjer = i;
+    }
+    else
+    {
+      int suprotniSmjer = PacmanSuprotniSmjer(trenutniSmjer);
+      ArrayList<Integer> listaMogucihSmjerova = new ArrayList<Integer>();
+      for (int i=0; i<4; ++i)
+        if (moguciSmjerovi[i] && i != suprotniSmjer)
+          listaMogucihSmjerova.add(new Integer(i));
+      OdluciKadImasIzbora(listaMogucihSmjerova);
+    }
+    
+    tockaIzmedu = 1;
+  }
+  
+  abstract protected void OdluciKadImasIzbora(ArrayList<Integer> moguciSmjerovi);
 }
 
 public class PacmanPametniProtivnik extends PacmanProtivnik
@@ -106,14 +146,16 @@ public class PacmanPametniProtivnik extends PacmanProtivnik
     super(pocetnoPolje, pocetniSmjer);
   }
   
-  public void OdluciOSljedecemSmjeru()
-  {
-    
-  }
-  
   public void NacrtajNaPoziciji(float[] pozicija, float sirinaPolja, float visinaPolja)
   {
+    fill(255,0,0); // crvena
+    stroke(255,0,0);
+
+    ellipse(pozicija[0], pozicija[1], sirinaPolja*0.8, visinaPolja*0.8);
+  }
   
+  void OdluciKadImasIzbora(ArrayList<Integer> moguciSmjerovi)
+  {
   }
 }
 
@@ -124,13 +166,16 @@ public class PacmanGlupiProtivnik extends PacmanProtivnik
     super(pocetnoPolje, pocetniSmjer);
   }
   
-  public void OdluciOSljedecemSmjeru()
-  {
-    
-  }
-  
   public void NacrtajNaPoziciji(float[] pozicija, float sirinaPolja, float visinaPolja)
   {
-    
+    fill(255,128,0); // narancasta
+    stroke(255,128,0);
+
+    ellipse(pozicija[0], pozicija[1], sirinaPolja*0.8, visinaPolja*0.8);
+  }
+  
+  void OdluciKadImasIzbora(ArrayList<Integer> moguciSmjerovi)
+  {
+    trenutniSmjer = moguciSmjerovi.get(int(random(moguciSmjerovi.size())));
   }
 }

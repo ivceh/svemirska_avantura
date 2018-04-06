@@ -4,7 +4,7 @@ import java.util.Arrays;
 final int pacmanTOCKA = 0, pacmanZID = 1, pacmanPRAZNO = 2;
 
 // smjerovi
-final int pacmanDesno = 0, pacmanGore = 1, pacmanLijevo = 2, pacmanDolje = 3;
+final static int pacmanDesno = 0, pacmanGore = 1, pacmanLijevo = 2, pacmanDolje = 3;
 
 // vektori smjerova
 final int[][] pacmanVektorSmjera = {{1,0}, {0,-1}, {-1,0}, {0,1}};
@@ -77,7 +77,11 @@ void pacman()
     }
   
   pacman = new Pacman(new int[]{20,7}, pacmanDesno, pacmanDesno);
-  pacmanLikovi = new PacmanLik[]{pacman};
+  pacmanLikovi = new PacmanLik[]{
+                                  pacman,
+                                  new PacmanGlupiProtivnik(new int[]{5,10}, pacmanDolje),
+                                  new PacmanGlupiProtivnik(new int[]{15,18}, pacmanGore)
+                                };
   
   pacmanDoPocetkaIgre = 180;
   brojBodova = 200;
@@ -183,4 +187,9 @@ void PacmanKeyPressed()
         --pacmanDoPocetkaIgre;
     }
   }
+}
+
+int PacmanSuprotniSmjer(int smjer)
+{
+  return (smjer+2)%4;
 }
