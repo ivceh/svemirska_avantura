@@ -21,7 +21,7 @@ PFont pacmanFont;
 PFont pacmanFontVeliki;
 
 // definiranje polja: 0 za tocke, 1 za zid, 2 za prazna polja
-int[][] pacmanStanjaPolja =
+static int[][] pacmanStanjaPolja =
   {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
    {1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
    {1,0,1,1,0,0,0,1,0,1,1,1,0,1,0,1,1,1,1,0,1,1,1,1,1,1,0,1},
@@ -44,8 +44,8 @@ int[][] pacmanStanjaPolja =
    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
 
 // racunanje velicine polje
-final int pacmanPoljaOkomito = pacmanStanjaPolja.length,
-          pacmanPoljaVodoravno = pacmanStanjaPolja[0].length;
+final static int pacmanPoljaOkomito = pacmanStanjaPolja.length,
+                 pacmanPoljaVodoravno = pacmanStanjaPolja[0].length;
           
 // broj preostalih tockica
 int pacmanBrojTockica;
@@ -80,7 +80,11 @@ void pacman()
   pacmanLikovi = new PacmanLik[]{
                                   pacman,
                                   new PacmanGlupiProtivnik(new int[]{5,10}, pacmanDolje),
-                                  new PacmanGlupiProtivnik(new int[]{15,18}, pacmanGore)
+                                  new PacmanGlupiProtivnik(new int[]{15,18}, pacmanGore),
+                                  new PacmanGlupiProtivnik(new int[]{1,1}, pacmanDesno),
+                                  new PacmanGlupiProtivnik(new int[]{1,18}, pacmanDesno),
+                                  new PacmanGlupiProtivnik(new int[]{8,4}, pacmanDolje),
+                                  new PacmanPametniProtivnik(new int[]{26,18}, pacmanGore)
                                 };
   
   pacmanDoPocetkaIgre = 180;

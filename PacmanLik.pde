@@ -156,8 +156,69 @@ public class PacmanPametniProtivnik extends PacmanProtivnik
   
   void OdluciKadImasIzbora(ArrayList<Integer> moguciSmjerovi)
   {
+    int maxi = 0, maxdobrota = KolikoJeSmjerDobar(pacman.trenutnoPolje, this.trenutnoPolje, moguciSmjerovi.get(0));
+    float maxrandom = random(1);
+    for (int i = 1; i < moguciSmjerovi.size(); ++i)
+    {
+      int dobrota = KolikoJeSmjerDobar(pacman.trenutnoPolje, this.trenutnoPolje, moguciSmjerovi.get(i));
+      if (dobrota > maxdobrota)
+      {
+        maxi = i;
+        maxdobrota = dobrota;
+        maxrandom = random(1);
+      }
+      else if (dobrota == maxdobrota)
+      {
+        float random = random(1);
+        if (random > maxrandom)
+        {
+          maxi = i;
+          maxdobrota = dobrota;
+          maxrandom = random;
+        }
+      }
+    }
+    
+    trenutniSmjer = moguciSmjerovi.get(maxi);
   }
 }
+
+private static int NenegativniOstatak(int a, int b)
+{
+  int c = a % b;
+  if (c >= 0)
+    return c;
+  else
+    return c + b;
+}
+  
+static private int KolikoJeSmjerDobar(int[] pacmanPolje, int[] protivnikPolje, int smjer)
+{
+  switch(smjer)
+  {
+    case pacmanDesno:
+      int udaljenostDesno = NenegativniOstatak(pacmanPolje[0] - protivnikPolje[0], pacmanPoljaVodoravno);
+      if (udaljenostDesno < pacmanPoljaVodoravno / 2)
+        return udaljenostDesno;
+      else
+        return pacmanPoljaVodoravno / 2 - udaljenostDesno;  
+    case pacmanGore:
+      return protivnikPolje[1] - pacmanPolje[1];
+    case pacmanLijevo:
+      int udaljenostLijevo = NenegativniOstatak(protivnikPolje[0] - pacmanPolje[0], pacmanPoljaVodoravno);
+      if (udaljenostLijevo < pacmanPoljaVodoravno / 2)
+        return udaljenostLijevo;
+      else
+        return pacmanPoljaVodoravno / 2 - udaljenostLijevo;
+    case pacmanDolje:
+      return pacmanPolje[1] - protivnikPolje[1];
+    default:
+      print("??????");
+      return -1000; // ovo se nikad ne bi trebalo dogoditi
+  }
+}
+
+
 
 public class PacmanGlupiProtivnik extends PacmanProtivnik
 {
