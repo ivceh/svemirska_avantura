@@ -98,6 +98,21 @@ abstract public class PacmanProtivnik extends PacmanLik
     super(pocetnoPolje, pocetniSmjer, 11);
   }
   
+  public void Pomakni()
+  {
+    super.Pomakni();
+    float jaX = trenutnoPolje[0] + tockaIzmedu / brojPomakaZaJednoPolje * pacmanVektorSmjera[trenutniSmjer][0],
+          jaY = trenutnoPolje[1] + tockaIzmedu / brojPomakaZaJednoPolje * pacmanVektorSmjera[trenutniSmjer][1],
+          pacmanX = pacman.trenutnoPolje[0] + pacman.tockaIzmedu / pacman.brojPomakaZaJednoPolje * pacmanVektorSmjera[trenutniSmjer][0],
+          pacmanY = pacman.trenutnoPolje[1] + pacman.tockaIzmedu / pacman.brojPomakaZaJednoPolje * pacmanVektorSmjera[trenutniSmjer][1];
+    
+    if ((jaX-pacmanX)*(jaX-pacmanX) + (jaY-pacmanY)*(jaY-pacmanY) < 0.8)
+    {
+      brojBodova = 1;
+      pacmanIgraGotova = true;
+    }
+  }
+  
   public void OdluciOSljedecemSmjeru()
   {
     boolean[] moguciSmjerovi = new boolean[4];

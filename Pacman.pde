@@ -119,7 +119,7 @@ void crtajPacmana()
       textFont(pacmanFont);
       textAlign(LEFT, TOP);
       fill(255);
-      text("Pritisnite strelicu \n za pocetak", width * 0.83, height * 0.1);
+      text("Pritisnite strelicu \n za pocetak", width * 0.83, height * 0.08);
     }
     else
     {
@@ -130,14 +130,15 @@ void crtajPacmana()
       text(pacmanDoPocetkaIgre / 60 + 1, width * 0.89, height * 0.1);
     }
   }
-  else if (!pacmanIgraGotova)
+  else
   {
-    for (PacmanLik lik : pacmanLikovi)
-      lik.Pomakni();
+    if (!pacmanIgraGotova)
+      for (PacmanLik lik : pacmanLikovi)
+        lik.Pomakni();
     textFont(pacmanFont);
     textAlign(LEFT, TOP);
     fill(255);
-    text("Preostalo tockica: " + pacmanBrojTockica, width * 0.83, height * 0.1);
+    text("Preostalo tockica: " + pacmanBrojTockica, width * 0.83, height * 0.08);
   }
   
   // crtanje likova
@@ -151,7 +152,10 @@ void crtajPacmana()
   rect(pacmanSirinaPolja*pacmanPoljaVodoravno, 0, pacmanSirinaPolja, pacmanVisinaPolja*pacmanPoljaOkomito);
   
   if (pacmanIgraGotova)
+  {
     crtajGameOverFormu();//Design by Sebastijan
+    strokeWeight(1);
+  }
 }
 
 int[] PacmanSljedecePolje(int[] trenutno_polje, int smjer)
