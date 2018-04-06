@@ -56,7 +56,7 @@ public class Pacman extends PacmanLik
   
   public Pacman(int[] pocetnoPolje, int pocetniSmjer, int sljedeciSmjer)
   {
-    super(pocetnoPolje, pocetniSmjer, 10);
+    super(pocetnoPolje, pocetniSmjer, 20);
     this.sljedeciSmjer = sljedeciSmjer;
   }
   
@@ -98,7 +98,7 @@ abstract public class PacmanProtivnik extends PacmanLik
 {
   public PacmanProtivnik(int[] pocetnoPolje, int pocetniSmjer)
   {
-    super(pocetnoPolje, pocetniSmjer, 11);
+    super(pocetnoPolje, pocetniSmjer, 21);
   }
   
   public void Pomakni()
@@ -106,8 +106,8 @@ abstract public class PacmanProtivnik extends PacmanLik
     super.Pomakni();
     float jaX = trenutnoPolje[0] + tockaIzmedu / brojPomakaZaJednoPolje * pacmanVektorSmjera[trenutniSmjer][0],
           jaY = trenutnoPolje[1] + tockaIzmedu / brojPomakaZaJednoPolje * pacmanVektorSmjera[trenutniSmjer][1],
-          pacmanX = pacman.trenutnoPolje[0] + pacman.tockaIzmedu / pacman.brojPomakaZaJednoPolje * pacmanVektorSmjera[trenutniSmjer][0],
-          pacmanY = pacman.trenutnoPolje[1] + pacman.tockaIzmedu / pacman.brojPomakaZaJednoPolje * pacmanVektorSmjera[trenutniSmjer][1];
+          pacmanX = pacman.trenutnoPolje[0] + pacman.tockaIzmedu / pacman.brojPomakaZaJednoPolje * pacmanVektorSmjera[pacman.trenutniSmjer][0],
+          pacmanY = pacman.trenutnoPolje[1] + pacman.tockaIzmedu / pacman.brojPomakaZaJednoPolje * pacmanVektorSmjera[pacman.trenutniSmjer][1];
     
     if ((jaX-pacmanX)*(jaX-pacmanX) + (jaY-pacmanY)*(jaY-pacmanY) < 0.8)
     {

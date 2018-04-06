@@ -144,6 +144,14 @@ void crtajPacmana()
         lik.Pomakni();
       if (pacmanVrijeme < Integer.MAX_VALUE)
         ++pacmanVrijeme;
+        
+      if (frameRate < 30)
+      {
+        for (PacmanLik lik : pacmanLikovi)
+          lik.Pomakni();
+        if (pacmanVrijeme < Integer.MAX_VALUE)
+          ++pacmanVrijeme;
+      }
     }
     textFont(pacmanFont);
     textAlign(LEFT, TOP);
@@ -222,5 +230,5 @@ int PacmanBodoviZaTockice()
 
 int PacmanBodoviZaVrijeme()
 {
-  return (int)(2000000/(float)(2000 + pacmanVrijeme));
+  return (int)(10000000/(float)(10000 + pacmanVrijeme));
 }
