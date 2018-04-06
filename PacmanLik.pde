@@ -67,7 +67,10 @@ public class Pacman extends PacmanLik
       pacmanStanjaPolja[trenutnoPolje[1]][trenutnoPolje[0]] = pacmanPRAZNO;
       --pacmanBrojTockica;
       if (pacmanBrojTockica == 0)
+      {
         pacmanIgraGotova = true;
+        brojBodova = PacmanBodoviZaTockice() + PacmanBodoviZaVrijeme();
+      }
     }
     
     if (PacmanSljedecePoljeJeZid(trenutnoPolje, sljedeciSmjer))
@@ -108,8 +111,8 @@ abstract public class PacmanProtivnik extends PacmanLik
     
     if ((jaX-pacmanX)*(jaX-pacmanX) + (jaY-pacmanY)*(jaY-pacmanY) < 0.8)
     {
-      brojBodova = 1;
       pacmanIgraGotova = true;
+      brojBodova = PacmanBodoviZaTockice();
     }
   }
   

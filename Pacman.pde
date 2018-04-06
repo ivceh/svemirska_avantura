@@ -47,11 +47,15 @@ static int[][] pacmanStanjaPolja =
 final static int pacmanPoljaOkomito = pacmanStanjaPolja.length,
                  pacmanPoljaVodoravno = pacmanStanjaPolja[0].length;
           
-// broj preostalih tockica
+// broj tockica
+int pacmanPocetniBrojTockica;
 int pacmanBrojTockica;
 
 // je li igra gotova
 boolean pacmanIgraGotova;
+
+// brojac vremena
+int pacmanVrijeme = 0;
 
 void pacmanSetup()
 {
@@ -75,6 +79,8 @@ void pacman()
         ++pacmanBrojTockica;
       }
     }
+    
+  pacmanPocetniBrojTockica = pacmanBrojTockica;
   
   pacman = new Pacman(new int[]{20,7}, pacmanDesno, pacmanDesno);
   pacmanLikovi = new PacmanLik[]{
@@ -133,12 +139,18 @@ void crtajPacmana()
   else
   {
     if (!pacmanIgraGotova)
+    {
       for (PacmanLik lik : pacmanLikovi)
         lik.Pomakni();
+      if (pacmanVrijeme < Integer.MAX_VALUE)
+        ++pacmanVrijeme;
+    }
     textFont(pacmanFont);
     textAlign(LEFT, TOP);
     fill(255);
-    text("Preostalo tockica: " + pacmanBrojTockica, width * 0.83, height * 0.08);
+    text("Preostalo tockica: " + pacmanBrojTockica, width * 0.83, height * 0.02);
+    text("Bodovi za tockice: " + PacmanBodoviZaTockice(), width * 0.83, height * 0.05);
+    text("Bodovi za vrijeme: " + PacmanBodoviZaVrijeme(), width * 0.83, height * 0.08);
   }
   
   // crtanje likova
@@ -200,4 +212,15 @@ void PacmanKeyPressed()
 int PacmanSuprotniSmjer(int smjer)
 {
   return (smjer+2)%4;
+}
+
+// brojanje bodova
+int PacmanBodoviZaTockice()
+{
+  return pacmanPocetniBrojTockica - pacmanBrojTockica;
+}
+
+int PacmanBodoviZaVrijeme()
+{
+  return (int)(2000000/(float)(2000 + pacmanVrijeme));
 }
