@@ -10,3 +10,12 @@ Izradili:
 </ul>
 
 ## Opis igre
+
+Aplikacija sadrži 3 svemirske igre u kojima treba treba skupiti što više bodova i izbjegavati protivnike ili prepreke.
+<hr />
+Igre:
+<ul>
+  <li> Star Hunter </li>
+  <li> SpaceMan </li>
+  <li> SpaceWars </li>
+</ul>
