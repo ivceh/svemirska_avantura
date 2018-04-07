@@ -98,7 +98,7 @@ void draw()
   } else if (stanjeIgre == 2)
   {
     //ovdje se poziva funkcija (tj. igra) za 2. level
-    crtajPacmana();
+    pacman();
   } else if (stanjeIgre == 3)
   {
     //ovdje se poziva funkcija (tj. igra) za 3. level
