@@ -28,7 +28,7 @@ void pacmanSetup()
   // racunanje visine i sirine pojedinog polja
   float pacmanSirinaPolja = width*0.8/pacmanPoljaVodoravno;
   
-  // ucitavanje slika likova
+  // ucitavanje slika likova i meteora
   pacmanShip = loadImage("spaceship"+indeksOznacenogBroda+".png");    
   pacmanShip.resize((int)(pacmanSirinaPolja*0.8), (int)(pacmanSirinaPolja*0.6));
   
@@ -45,6 +45,9 @@ void pacmanSetup()
   pacmanAlien4.resize((int)(pacmanSirinaPolja*0.7), (int)(pacmanSirinaPolja*0.7));
   pacmanAlien5 = loadImage("alien5.png");
   pacmanAlien5.resize((int)(pacmanSirinaPolja*0.7), (int)(pacmanSirinaPolja*0.7));
+  
+  pacmanMeteor = loadImage("meteor.png");
+  pacmanMeteor.resize((int)(pacmanSirinaPolja*0.25), (int)(pacmanSirinaPolja*0.25));
   
   // inicijalizacija likova
   pacman = new Pacman(new int[]{20,7}, pacmanDesno, pacmanDesno);
@@ -81,7 +84,8 @@ void pacman()
       if (pacmanStanjaPolja[i][j] == pacmanZID)
         rect(pacmanSirinaPolja*(j+0.5), pacmanVisinaPolja*(i+0.5), pacmanSirinaPolja, pacmanVisinaPolja);
       else if (pacmanStanjaPolja[i][j] == pacmanTOCKA)
-        ellipse(pacmanSirinaPolja*(j+0.5), pacmanVisinaPolja*(i+0.5), pacmanSirinaPolja/8., pacmanVisinaPolja/8.);
+      
+        image(pacmanMeteor, pacmanSirinaPolja*(j+0.5), pacmanVisinaPolja*(i+0.5));
     }
   
   if (pacmanDoPocetkaIgre > 0)
@@ -121,8 +125,8 @@ void pacman()
     textFont(pacmanFont);
     textAlign(LEFT, TOP);
     fill(255);
-    text("Preostalo tockica: " + pacmanBrojTockica, width * 0.83, height * 0.02);
-    text("Bodovi za tockice: " + PacmanBodoviZaTockice(), width * 0.83, height * 0.05);
+    text("Preostalo meteora: " + pacmanBrojTockica, width * 0.83, height * 0.02);
+    text("Bodovi za meteore: " + PacmanBodoviZaTockice(), width * 0.83, height * 0.05);
     text("Bodovi za vrijeme: " + PacmanBodoviZaVrijeme(), width * 0.83, height * 0.08);
   }
   
