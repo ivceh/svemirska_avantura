@@ -38,7 +38,7 @@ void crtajInformacije()
   fill(0, 0, 153);
   rect(polozajBoxaX, polozajBoxaY, sirinaBoxa,visinaBoxa);
   fill(255);
-  text(opisiIgara[0], polozajBoxaX, polozajBoxaY, sirinaBoxa*8/9, visinaBoxa*8/9);
+  text(opisiIgara[brojIgreZaPrikaz], polozajBoxaX, polozajBoxaY, sirinaBoxa*8/9, visinaBoxa*8/9);
   
   
   //box za highscore
@@ -112,7 +112,7 @@ void ucitajPodatkeZaInfoMenu(){
   imenaIgara[2]="SpaceWars";
   
    opisiIgara[0]="Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. ";
-   opisiIgara[1]="Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. ";
+   opisiIgara[1]="Treba pomoci svemirskom brodu da sakupi sve meteore. Ali tu je NLO i zli svemirci koji zele unistiti svemirski brod. ";
    opisiIgara[2]="Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. ";
 
    for(int i=0;i<3;i++)
