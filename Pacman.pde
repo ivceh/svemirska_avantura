@@ -39,6 +39,12 @@ void pacmanSetup()
   pacmanDoPocetkaIgre = 180;
   brojBodova = 200;
   pacmanIgraGotova = false;
+  
+  // racunanje visine i sirine pojedinog polja
+  float pacmanSirinaPolja = width*0.8/pacmanPoljaVodoravno;
+  
+  pacmanShip = loadImage("spaceship"+indeksOznacenogBroda+".png");    
+  pacmanShip.resize((int)(pacmanSirinaPolja*0.8), (int)(pacmanSirinaPolja*0.6));
 }
 
 

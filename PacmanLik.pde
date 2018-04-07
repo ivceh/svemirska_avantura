@@ -92,8 +92,31 @@ public class Pacman extends PacmanLik
   {
     fill(255,255,0); // zuta
     stroke(255,255,0);
-
-    ellipse(pozicija[0], pozicija[1], sirinaPolja*0.8, visinaPolja*0.8);
+    
+    switch(trenutniSmjer)
+    {
+      case pacmanDesno:
+        image(pacmanShip, pozicija[0], pozicija[1]);
+        break;
+      case pacmanGore:
+        pushMatrix();
+        rotate(PI/2);
+        scale(-1,1);
+        image(pacmanShip, -pozicija[1], -pozicija[0]);
+        popMatrix();
+        break;
+      case pacmanLijevo:
+        pushMatrix();
+        scale(-1,1);
+        image(pacmanShip, -pozicija[0], pozicija[1]);
+        popMatrix();
+        break;
+      case pacmanDolje:
+        pushMatrix();
+        rotate(PI/2);
+        image(pacmanShip, pozicija[1], -pozicija[0]);
+        popMatrix();
+    }
   }
 }
 

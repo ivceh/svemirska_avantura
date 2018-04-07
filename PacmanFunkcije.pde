@@ -55,6 +55,9 @@ boolean pacmanIgraGotova;
 // brojac vremena
 long pacmanVrijeme = 0;
 
+// slike
+PImage pacmanShip;
+
 int[] PacmanSljedecePolje(int[] trenutno_polje, int smjer)
 {
   int sljedece_polje[] = {trenutno_polje[0]+pacmanVektorSmjera[smjer][0],
