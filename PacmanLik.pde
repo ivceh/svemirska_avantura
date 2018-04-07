@@ -115,7 +115,7 @@ abstract public class PacmanProtivnik extends PacmanLik
           pacmanX = pacman.trenutnoPolje[0] + pacman.tockaIzmedu / pacman.brojPomakaZaJednoPolje * pacmanVektorSmjera[pacman.trenutniSmjer][0],
           pacmanY = pacman.trenutnoPolje[1] + pacman.tockaIzmedu / pacman.brojPomakaZaJednoPolje * pacmanVektorSmjera[pacman.trenutniSmjer][1];
     
-    if ((jaX-pacmanX)*(jaX-pacmanX) + (jaY-pacmanY)*(jaY-pacmanY) < 0.8)
+    if ((jaX-pacmanX)*(jaX-pacmanX) + (jaY-pacmanY)*(jaY-pacmanY) < 0.64)
     {
       pacmanIgraGotova = true;
       brojBodova = PacmanBodoviZaTockice();

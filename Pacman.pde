@@ -11,6 +11,7 @@ void pacmanSetup()
   pacmanFontVeliki = createFont("MONO.ttf",40);
   
   pacmanBrojTockica = 0;
+  pacmanVrijeme = 0;
   
   for (int i=0; i<pacmanPoljaOkomito; ++i)
     for (int j=0; j<pacmanPoljaVodoravno; ++j)
