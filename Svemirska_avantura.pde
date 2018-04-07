@@ -400,8 +400,10 @@ void keyPressed()
   }
 
   //pritiskom na tipku h se help krene crtati (u igri, ali da nije Game Over)
-  else if (crtanjeHelpa == false && (key == 'h' || key == 'H')) {
+  else if (crtanjeHelpa == false && (key == 'h' || key == 'H' || key == 'p' || key == 'P')) {
     if (stanjeIgre == 1 && raceGameOver == false) {
+      crtanjeHelpa = true;
+    } else if (stanjeIgre == 2 && pacmanIgraGotova == false) {
       crtanjeHelpa = true;
     } else if (stanjeIgre == 3 && spaceshipGameOver == false) {
       crtanjeHelpa = true;
