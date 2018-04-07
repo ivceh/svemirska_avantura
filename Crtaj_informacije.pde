@@ -117,7 +117,7 @@ void ucitajPodatkeZaInfoMenu(){
 
    for(int i=0;i<3;i++)
    {
-     slikeIgara[i]=loadImage("Game3.png");  
+     slikeIgara[i]=loadImage("Game"+(i+1)+".png");  
      slikeIgara[i].resize(width/3, height/2);
    }
 
