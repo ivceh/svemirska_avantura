@@ -58,6 +58,7 @@ long pacmanVrijeme = 0;
 // slike
 PImage pacmanShip;
 PImage pacmanUFO;
+PImage pacmanAlien1, pacmanAlien2, pacmanAlien3, pacmanAlien4, pacmanAlien5;
 
 int[] PacmanSljedecePolje(int[] trenutno_polje, int smjer)
 {

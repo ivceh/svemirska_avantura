@@ -138,7 +138,7 @@ abstract public class PacmanProtivnik extends PacmanLik
           pacmanX = pacman.trenutnoPolje[0] + pacman.tockaIzmedu / pacman.brojPomakaZaJednoPolje * pacmanVektorSmjera[pacman.trenutniSmjer][0],
           pacmanY = pacman.trenutnoPolje[1] + pacman.tockaIzmedu / pacman.brojPomakaZaJednoPolje * pacmanVektorSmjera[pacman.trenutniSmjer][1];
     
-    if ((jaX-pacmanX)*(jaX-pacmanX) + (jaY-pacmanY)*(jaY-pacmanY) < 0.64)
+    if ((jaX-pacmanX)*(jaX-pacmanX) + (jaY-pacmanY)*(jaY-pacmanY) < 0.49)
     {
       pacmanIgraGotova = true;
       brojBodova = PacmanBodoviZaTockice();
@@ -273,9 +273,12 @@ static private int KolikoJeSmjerDobar(int[] pacmanPolje, int[] protivnikPolje, i
 
 public class PacmanGlupiProtivnik extends PacmanProtivnik
 {
-  public PacmanGlupiProtivnik(int[] pocetnoPolje, int pocetniSmjer)
+  PImage slika;
+  
+  public PacmanGlupiProtivnik(int[] pocetnoPolje, int pocetniSmjer, PImage slika)
   {
     super(pocetnoPolje, pocetniSmjer);
+    this.slika = slika;
   }
   
   public void NacrtajNaPoziciji(float[] pozicija, float sirinaPolja, float visinaPolja)
@@ -283,7 +286,7 @@ public class PacmanGlupiProtivnik extends PacmanProtivnik
     fill(255,128,0); // narancasta
     stroke(255,128,0);
 
-    ellipse(pozicija[0], pozicija[1], sirinaPolja*0.8, visinaPolja*0.8);
+    image(slika, pozicija[0], pozicija[1]);
   }
   
   void OdluciKadImasIzbora(ArrayList<Integer> moguciSmjerovi)

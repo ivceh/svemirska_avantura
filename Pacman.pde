@@ -25,29 +25,42 @@ void pacmanSetup()
     
   pacmanPocetniBrojTockica = pacmanBrojTockica;
   
+  // racunanje visine i sirine pojedinog polja
+  float pacmanSirinaPolja = width*0.8/pacmanPoljaVodoravno;
+  
+  // ucitavanje slika likova
+  pacmanShip = loadImage("spaceship"+indeksOznacenogBroda+".png");    
+  pacmanShip.resize((int)(pacmanSirinaPolja*0.8), (int)(pacmanSirinaPolja*0.6));
+  
+  pacmanUFO = loadImage("UFO.png");
+  pacmanUFO.resize((int)(pacmanSirinaPolja*0.7), (int)(pacmanSirinaPolja*0.7));
+  
+  pacmanAlien1 = loadImage("alien1.png");
+  pacmanAlien1.resize((int)(pacmanSirinaPolja*0.7), (int)(pacmanSirinaPolja*0.7));
+  pacmanAlien2 = loadImage("alien2.png");
+  pacmanAlien2.resize((int)(pacmanSirinaPolja*0.7), (int)(pacmanSirinaPolja*0.7));
+  pacmanAlien3 = loadImage("alien3.png");
+  pacmanAlien3.resize((int)(pacmanSirinaPolja*0.7), (int)(pacmanSirinaPolja*0.7));
+  pacmanAlien4 = loadImage("alien4.png");
+  pacmanAlien4.resize((int)(pacmanSirinaPolja*0.7), (int)(pacmanSirinaPolja*0.7));
+  pacmanAlien5 = loadImage("alien5.png");
+  pacmanAlien5.resize((int)(pacmanSirinaPolja*0.7), (int)(pacmanSirinaPolja*0.7));
+  
+  // inicijalizacija likova
   pacman = new Pacman(new int[]{20,7}, pacmanDesno, pacmanDesno);
   pacmanLikovi = new PacmanLik[]{
                                   pacman,
-                                  new PacmanGlupiProtivnik(new int[]{5,10}, pacmanDolje),
-                                  new PacmanGlupiProtivnik(new int[]{15,18}, pacmanGore),
-                                  new PacmanGlupiProtivnik(new int[]{1,1}, pacmanDesno),
-                                  new PacmanGlupiProtivnik(new int[]{1,18}, pacmanDesno),
-                                  new PacmanGlupiProtivnik(new int[]{8,4}, pacmanDolje),
+                                  new PacmanGlupiProtivnik(new int[]{5,10}, pacmanDolje, pacmanAlien1),
+                                  new PacmanGlupiProtivnik(new int[]{15,18}, pacmanGore, pacmanAlien2),
+                                  new PacmanGlupiProtivnik(new int[]{1,1}, pacmanDesno, pacmanAlien3),
+                                  new PacmanGlupiProtivnik(new int[]{1,18}, pacmanDesno, pacmanAlien4),
+                                  new PacmanGlupiProtivnik(new int[]{8,4}, pacmanDolje, pacmanAlien5),
                                   new PacmanPametniProtivnik(new int[]{26,18}, pacmanGore)
                                 };
   
   pacmanDoPocetkaIgre = 180;
   brojBodova = 200;
   pacmanIgraGotova = false;
-  
-  // racunanje visine i sirine pojedinog polja
-  float pacmanSirinaPolja = width*0.8/pacmanPoljaVodoravno;
-  
-  pacmanShip = loadImage("spaceship"+indeksOznacenogBroda+".png");    
-  pacmanShip.resize((int)(pacmanSirinaPolja*0.8), (int)(pacmanSirinaPolja*0.6));
-  
-  pacmanUFO = loadImage("UFO.png");
-  pacmanUFO.resize((int)(pacmanSirinaPolja*0.7), (int)(pacmanSirinaPolja*0.7));
 }
 
 
