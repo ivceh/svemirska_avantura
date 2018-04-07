@@ -1,5 +1,9 @@
 void pacmanSetup()
 {
+  player.close(); //stop music
+  player = minim.loadFile("Galactic.mp3"); //TODO: find music for Pacman
+  player.loop(); //play music
+  
   rectMode(CENTER);
   strokeWeight(1);
   
@@ -35,6 +39,7 @@ void pacmanSetup()
   brojBodova = 200;
   pacmanIgraGotova = false;
 }
+
 
 void pacman()
 {
@@ -78,16 +83,15 @@ void pacman()
   {
     if (!pacmanIgraGotova)
     {
-      for (PacmanLik lik : pacmanLikovi)
-        lik.Pomakni();
-      if (pacmanVrijeme < Integer.MAX_VALUE)
-        ++pacmanVrijeme;
-        
-      if (frameRate < 30)
+      float fBrojPomaka = pacmanZaostatak + 60/frameRate;
+      int iBrojPomaka = (int)fBrojPomaka;
+      pacmanZaostatak = fBrojPomaka - iBrojPomaka;
+      
+      for (int i=0; i<iBrojPomaka; ++i)
       {
         for (PacmanLik lik : pacmanLikovi)
           lik.Pomakni();
-        if (pacmanVrijeme < Integer.MAX_VALUE)
+        if (pacmanVrijeme < Long.MAX_VALUE)
           ++pacmanVrijeme;
       }
     }
@@ -115,6 +119,8 @@ void pacman()
     strokeWeight(1);
   }
 }
+float pacmanZaostatak = 0;
+
 
 void PacmanKeyPressed()
 {

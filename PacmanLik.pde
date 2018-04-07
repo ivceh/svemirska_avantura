@@ -50,6 +50,9 @@ abstract public class PacmanLik
   abstract public void NacrtajNaPoziciji(float[] pozicija, float sirinaPolja, float visinaPolja);
 }
 
+
+
+
 public class Pacman extends PacmanLik
 {
   public int sljedeciSmjer;
@@ -93,6 +96,9 @@ public class Pacman extends PacmanLik
     ellipse(pozicija[0], pozicija[1], sirinaPolja*0.8, visinaPolja*0.8);
   }
 }
+
+
+
 
 abstract public class PacmanProtivnik extends PacmanLik
 {
@@ -156,6 +162,9 @@ abstract public class PacmanProtivnik extends PacmanLik
   
   abstract protected void OdluciKadImasIzbora(ArrayList<Integer> moguciSmjerovi);
 }
+
+
+
 
 public class PacmanPametniProtivnik extends PacmanProtivnik
 {
@@ -235,6 +244,7 @@ static private int KolikoJeSmjerDobar(int[] pacmanPolje, int[] protivnikPolje, i
       return -1000; // ovo se nikad ne bi trebalo dogoditi
   }
 }
+
 
 
 

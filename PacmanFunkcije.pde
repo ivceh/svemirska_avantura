@@ -1,6 +1,3 @@
-//import java.util.Arrays;
-//???
-
 // globalne konstante za stanja polja
 final int pacmanTOCKA = 0, pacmanZID = 1, pacmanPRAZNO = 2;
 
@@ -56,7 +53,7 @@ int pacmanBrojTockica;
 boolean pacmanIgraGotova;
 
 // brojac vremena
-int pacmanVrijeme = 0;
+long pacmanVrijeme = 0;
 
 int[] PacmanSljedecePolje(int[] trenutno_polje, int smjer)
 {
@@ -89,5 +86,5 @@ int PacmanBodoviZaTockice()
 
 int PacmanBodoviZaVrijeme()
 {
-  return (int)(10000000/(float)(10000 + pacmanVrijeme));
+  return (int)(10000000/(float)(10000 + (float)pacmanVrijeme));
 }
