@@ -201,7 +201,7 @@ public class PacmanPametniProtivnik extends PacmanProtivnik
     fill(255,0,0); // crvena
     stroke(255,0,0);
 
-    ellipse(pozicija[0], pozicija[1], sirinaPolja*0.8, visinaPolja*0.8);
+    image(pacmanUFO, pozicija[0], pozicija[1]);
   }
   
   void OdluciKadImasIzbora(ArrayList<Integer> moguciSmjerovi)

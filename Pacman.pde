@@ -45,6 +45,9 @@ void pacmanSetup()
   
   pacmanShip = loadImage("spaceship"+indeksOznacenogBroda+".png");    
   pacmanShip.resize((int)(pacmanSirinaPolja*0.8), (int)(pacmanSirinaPolja*0.6));
+  
+  pacmanUFO = loadImage("UFO.png");
+  pacmanUFO.resize((int)(pacmanSirinaPolja*0.7), (int)(pacmanSirinaPolja*0.7));
 }
 
 
