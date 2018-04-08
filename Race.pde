@@ -1,11 +1,12 @@
 PImage raceShip;//,raceRestartGumb,raceExitGumb; //igracev brod, gubbovi za meni kada igrac izgubi
 PImage[] raceZivotiBrod= new PImage[3];
-int raceShipX,raceShipY ;//pozicija igraca
+int raceShipX,raceShipY ;//pozicija igraca 
 int raceShipSpeed;    //brzina kojom se brod krece lijevo-desno
 int raceBrojZivota;
 boolean raceGameOver;// dal je igrac izgubio
 PFont raceFont;
 int racePassedMillis; //pomocna varijabla koju koristim za provjeru vremena proslog od zadnje aktivacije neke instance nekog objekta
+int razmakIzmedjuBombi=2500; //vrijeme izmedju dvije bombe
 
 void raceSetup()
 {
@@ -93,8 +94,9 @@ void race()
        raceNoviStar();
     }
     
+    raceViseBombi();
     racePassedMillis=millis()-raceTimeBomb;
-    if(racePassedMillis>1500){  //svakih 1.5 secunde dodaj novi bomb---------------------------TODO: ovo prilagoditi kolicinu
+    if(racePassedMillis>razmakIzmedjuBombi){  //svakih 1.5 secunde dodaj novi bomb---------------------------TODO: ovo prilagoditi kolicinu
        raceTimeBomb=millis();
        raceNoviBomb();
     }
@@ -121,7 +123,12 @@ void race()
   }
 }
 
-
+void raceViseBombi(){
+  if(raceBombY.size() < 3)
+  {
+    razmakIzmedjuBombi -= 10;
+  }
+}
 
 
 void raceUcitajBrod(){  
@@ -177,5 +184,12 @@ void raceIspisiRezultat(){
   textSize(width/30);
   //text(raceBrojBodova, width-width/60, width/60);
   text(brojBodova, width-width/60, width/60);
-  
+
+
+  //ispis upute kako doći do help-a
+  textAlign(LEFT, BOTTOM);
+  textSize(width/50);
+  fill(255);
+  text("Press h for help", 5, height-5);
+
 }

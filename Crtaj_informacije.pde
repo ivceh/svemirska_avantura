@@ -16,7 +16,7 @@ void crtajInformacije()
   textFont(createFont("MONO.ttf",32));
   textSize(width/50);
   textAlign(LEFT,TOP);
-  fill(0,0,255); //plavo
+  fill(255,255,255); //plavo
   text("Igra "+(brojIgreZaPrikaz+1)+". :"+imenaIgara[brojIgreZaPrikaz],width/20,height/10);
   
   //textAlign(RIGHT,TOP);
@@ -93,7 +93,7 @@ void crtajInformacije()
 
 void ucitajInfoMeni(){
   for(int i=0;i<3;i++){
-    slikeIgara[i] = loadImage("background.png");    
+    slikeIgara[i] = loadImage("Game"+str(i+1)+".png");    
     slikeIgara[i].resize(width/2, height/10); 
   }
   brojIgreZaPrikaz=0;
@@ -111,7 +111,7 @@ void ucitajPodatkeZaInfoMenu(){
   imenaIgara[1]="SpaceMen";
   imenaIgara[2]="SpaceWars";
   
-   opisiIgara[0]="Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. ";
+   opisiIgara[0]="Izbjegavaj meteorite na svom putu do zvijezda. Ne zaboravi da je svemir na tvojoj strani i salje ti razlicite boostere. ";
    opisiIgara[1]="Treba pomoci svemirskom brodu da sakupi sve meteore. Ali tu je NLO i zli svemirci koji zele unistiti svemirski brod. ";
    opisiIgara[2]="Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. ";
 

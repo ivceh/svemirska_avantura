@@ -1,5 +1,5 @@
 
- PImage raceStar;
+ PImage raceStar; 
  IntList raceStarX = new IntList(),raceStarY = new IntList();//pozicije zvijezda
  int raceTimeStar;
  
