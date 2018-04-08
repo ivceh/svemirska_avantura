@@ -108,8 +108,8 @@ void ucitajPodatkeZaInfoMenu(){
   imenaAutora[2]="Sebastijan Horvat";
   
   imenaIgara[0]="Star Hunter";
-  imenaIgara[1]="SpaceMen";
-  imenaIgara[2]="SpaceWars";
+  imenaIgara[1]="Packman";
+  imenaIgara[2]="Spaceship";
   
    opisiIgara[0]="Izbjegavaj meteorite na svom putu do zvijezda. Ne zaboravi da je svemir na tvojoj strani i salje ti razlicite boostere. ";
    opisiIgara[1]="Treba pomoci svemirskom brodu da sakupi sve meteore. Ali tu je NLO i zli svemirci koji zele unistiti svemirski brod. ";
