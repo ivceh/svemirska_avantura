@@ -113,7 +113,7 @@ void ucitajPodatkeZaInfoMenu(){
   
    opisiIgara[0]="Izbjegavaj meteorite na svom putu do zvijezda. Ne zaboravi da je svemir na tvojoj strani i salje ti razlicite boostere. ";
    opisiIgara[1]="Treba pomoci svemirskom brodu da sakupi sve meteore. Ali tu je NLO i zli svemirci koji zele unistiti svemirski brod. ";
-   opisiIgara[2]="Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. Neki dugi opis igre. ";
+   opisiIgara[2]="Zli izvanzemljaci okupili su smrtonosnu flotu (i nekoliko tenkova). Pomozi nasem junaku (u njegovom svemirskom brodu) sve ih unistiti! ";
 
    for(int i=0;i<3;i++)
    {
