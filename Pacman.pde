@@ -130,6 +130,11 @@ void pacman()
     text("Bodovi za vrijeme: " + PacmanBodoviZaVrijeme(), width * 0.83, height * 0.08);
   }
   
+  textFont(pacmanFont);
+  textAlign(LEFT, TOP);
+  fill(255);
+  text("Pritisnite H za help.", width * 0.83, height * 0.95);
+  
   // crtanje likova
   for (PacmanLik lik : pacmanLikovi)
     lik.Nacrtaj(pacmanSirinaPolja, pacmanVisinaPolja);
